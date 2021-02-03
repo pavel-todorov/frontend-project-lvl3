@@ -1,0 +1,24 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "Hexlet frontend project level 3",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pavel-todorov/frontend-project-lvl3.git"
+  },
+  "keywords": [
+    "Hexlet",
+    "Frontend",
+    "Level3"
+  ],
+  "author": "Pavel Todorov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pavel-todorov/frontend-project-lvl3/issues"
+  },
+  "homepage": "https://github.com/pavel-todorov/frontend-project-lvl3#readme"
+}
