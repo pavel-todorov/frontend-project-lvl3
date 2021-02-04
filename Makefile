@@ -3,7 +3,7 @@ start:
 build:
 	NODE_ENV=production npx webpack
 lint:
-	npx eslint ./src/index.js
+	npx eslint "src/**.js"
 test:
 	npm test
 install:
