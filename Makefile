@@ -1,7 +1,9 @@
+start:
+	NODE_ENV=development npx webpack
 build:
-	npm run build
-# lint:
-# 	npx eslint .
+	NODE_ENV=production npx webpack
+lint:
+	npx eslint ./src/index.js
 test:
 	npm test
 install:

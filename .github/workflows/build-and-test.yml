@@ -16,8 +16,8 @@ jobs:
       - name: Setup project
         run: npm install 
         
-    #   - name: Lint check
-    #     run: make lint
+      - name: Lint check
+        run: make lint
 
     #   - name: Testing
     #     run: make test

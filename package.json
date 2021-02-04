@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "test": "npm test",
-    "build": "webpack"
+    "start": "webpack --mode development",
+    "build": "webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -23,12 +24,21 @@
   },
   "homepage": "https://github.com/pavel-todorov/frontend-project-lvl3#readme",
   "devDependencies": {
+    "css-loader": "^5.0.1",
+    "eslint": "^7.19.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "html-webpack-plugin": "^5.0.0",
     "jest": "^26.6.3",
-    "webpack": "^5.20.0",
+    "sass-loader": "^10.1.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.20.1",
     "webpack-cli": "^4.5.0"
   },
   "dependencies": {
-    "bootstrap": "^5.0.0-beta1",
-    "lodash": "^4.17.20"
+    "bootstrap": "^3.4.1",
+    "jquery": "^3.5.1",
+    "lodash": "^4.17.20",
+    "popper.js": "^1.16.1"
   }
 }
