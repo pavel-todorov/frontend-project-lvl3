@@ -1,5 +1,5 @@
-import _ from 'lodash';
-import './js/bootstrap.min.js';
+// import _ from 'lodash';
+import './js/bootstrap.min';
 import './css/bootstrap.min.css';
 
 function component() {
@@ -29,19 +29,7 @@ function component() {
   const main = document.createElement('div');
   main.appendChild(form);
 
-  // const element = document.createElement('div');  
-  // element.textContent = 'Test';
-  // main.appendChild(element);
-
   return main;
-
-  // const button = document.createElement('button');
-  // button.type = 'submit';
-  // button.classList.add('btn', 'btn-primary');
-  // button.textContent = 'Submit';
-  // return button;
 }
-  
-document.body.appendChild(component());   
 
-// $('.btn.danger').button('toggle').addClass('fat');
+document.body.appendChild(component());
