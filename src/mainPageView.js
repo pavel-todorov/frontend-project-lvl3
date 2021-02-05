@@ -46,14 +46,26 @@ const generateMainPage = () => {
 
 const subscribeOnViewEvents = (events) => {
   document.querySelector('#cssLink').addEventListener('input', events.onRSSChange);
+  document.querySelector('#addButton').addEventListener('click', events.onAddRSSClicked);
 };
 
 const setAddButtonEnabled = (enabled) => {
   document.querySelector('#addButton').disabled = !enabled;
 };
 
+const setRSSFieldValid = (valid) => {
+  const input = document.querySelector('#cssLink');
+  // console.log(`setRSSFieldValid: ${valid}`);
+  if (valid) {
+    input.classList.remove('is-invalid');
+  } else {
+    input.classList.add('is-invalid');
+  }
+};
+
 module.exports = {
   generateMainPage,
   subscribeOnViewEvents,
   setAddButtonEnabled,
+  setRSSFieldValid,
 };

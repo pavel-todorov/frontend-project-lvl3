@@ -4,6 +4,7 @@ const model = {
   view: {
     form: {
       rssField: '',
+      rssValid: true,
       addButtonEnabled: false,
     },
     items: [],
