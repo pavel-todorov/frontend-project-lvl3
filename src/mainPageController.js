@@ -2,7 +2,12 @@ const yup = require('yup');
 const {
   setAddButtonEnabled,
   setRSSFieldValid,
+  showSimpleModal,
 } = require('./mainPageView');
+const {
+  download,
+} = require('./utils/network');
+const { parseRSSResponse } = require('./utils/parser');
 
 let model;
 const schema = yup.object().shape({
@@ -38,10 +43,16 @@ const mainPageViewEvents = {
     isRSSValid(link).then((isLinkValid) => {
       model.view.form.rssValid = isLinkValid;
       if (isLinkValid) {
+        parseRSSResponse(download(link))
+          .then((feeds) => {
+            console.log(`Feeds: '${JSON.stringify(feeds)}'`);
+          })
+          .catch((error) => {
+            console.log(`Error while download: ${error}`);
+            showSimpleModal(error);
+          });
         // @todo
         model.view.form.rssField = '';
-      } else {
-        // @todo
       }
     });
   },

@@ -4,7 +4,7 @@
   "description": "Hexlet frontend project level 3",
   "private": true,
   "scripts": {
-    "test": "npm test",
+    "test": "jest",
     "start": "webpack --mode development",
     "build": "webpack --mode production"
   },
@@ -36,11 +36,13 @@
     "webpack-cli": "^4.5.0"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "bootstrap": "^3.4.1",
     "jquery": "^3.5.1",
     "lodash": "^4.17.20",
     "on-change": "^2.2.3",
     "popper.js": "^1.16.1",
+    "source-map-loader": "^2.0.0",
     "yup": "^0.32.8"
   }
 }

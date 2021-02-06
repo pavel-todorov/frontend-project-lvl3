@@ -1,3 +1,5 @@
+/* eslint no-alert: "off" */
+
 const generateMainPage = () => {
   const baseHeader = document.createElement('h1');
   baseHeader.textContent = 'RSS Reader';
@@ -37,6 +39,7 @@ const generateMainPage = () => {
 
   const main = document.createElement('div');
   main.classList.add('container');
+  // main.appendChild(generateSimpleModal());
   main.appendChild(baseHeader);
   main.appendChild(tagLine);
   main.appendChild(formContaner);
@@ -63,9 +66,14 @@ const setRSSFieldValid = (valid) => {
   }
 };
 
+const showSimpleModal = (message = '') => {
+  alert(message);
+};
+
 module.exports = {
   generateMainPage,
   subscribeOnViewEvents,
   setAddButtonEnabled,
   setRSSFieldValid,
+  showSimpleModal,
 };
