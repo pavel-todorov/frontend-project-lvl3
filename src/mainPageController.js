@@ -1,8 +1,7 @@
 const yup = require('yup');
 const {
   setAddButtonEnabled,
-  setRSSFieldValid,
-  showSimpleModal,
+  showValidationInfo,
 } = require('./mainPageView');
 const {
   download,
@@ -20,8 +19,8 @@ const mainPageModelChangeCallback = (path, value) => { // previousValue, name
     case 'view.form.addButtonEnabled':
       setAddButtonEnabled(value);
       break;
-    case 'view.form.rssValid':
-      setRSSFieldValid(value);
+    case 'view.form.rssValidation':
+      showValidationInfo(value);
       break;
     default:
       break;
@@ -41,18 +40,20 @@ const mainPageViewEvents = {
     event.preventDefault();
     const link = model.view.form.rssField;
     isRSSValid(link).then((isLinkValid) => {
-      model.view.form.rssValid = isLinkValid;
       if (isLinkValid) {
         parseRSSResponse(download(link))
           .then((feeds) => {
             console.log(`Feeds: '${JSON.stringify(feeds)}'`);
+            model.view.form.rssValidation = { isValid: true, text: 'Downloaded OK.', showBorder: false };
           })
           .catch((error) => {
             console.log(`Error while download: ${error}`);
-            showSimpleModal(error);
+            model.view.form.rssValidation = { isValid: false, text: error, showBorder: true };
           });
         // @todo
         model.view.form.rssField = '';
+      } else {
+        model.view.form.rssValidation = { isValid: false, text: 'Invalid link', showBorder: true };
       }
     });
   },

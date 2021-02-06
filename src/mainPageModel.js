@@ -4,7 +4,11 @@ const model = {
   view: {
     form: {
       rssField: '',
-      rssValid: true,
+      rssValidation: {
+        isValid: true,
+        test: '',
+        showBorder: false,
+      },
       addButtonEnabled: false,
     },
     items: [],

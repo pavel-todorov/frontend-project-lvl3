@@ -1,5 +1,3 @@
-/* eslint no-alert: "off" */
-
 const generateMainPage = () => {
   const baseHeader = document.createElement('h1');
   baseHeader.textContent = 'RSS Reader';
@@ -17,6 +15,7 @@ const generateMainPage = () => {
   input.id = 'cssLink';
 
   const formGroup = document.createElement('div');
+  formGroup.id = 'rssInputGroup';
   formGroup.classList.add('input-group', 'mb-3');
   formGroup.appendChild(label);
   formGroup.appendChild(input);
@@ -39,7 +38,6 @@ const generateMainPage = () => {
 
   const main = document.createElement('div');
   main.classList.add('container');
-  // main.appendChild(generateSimpleModal());
   main.appendChild(baseHeader);
   main.appendChild(tagLine);
   main.appendChild(formContaner);
@@ -56,24 +54,33 @@ const setAddButtonEnabled = (enabled) => {
   document.querySelector('#addButton').disabled = !enabled;
 };
 
-const setRSSFieldValid = (valid) => {
+const showValidationInfo = (options) => {
   const input = document.querySelector('#cssLink');
-  // console.log(`setRSSFieldValid: ${valid}`);
-  if (valid) {
+  if (!options.showBorder) {
     input.classList.remove('is-invalid');
   } else {
     input.classList.add('is-invalid');
   }
-};
 
-const showSimpleModal = (message = '') => {
-  alert(message);
+  const group = document.querySelector('#rssInputGroup');
+
+  const lastItemClasses = group.lastChild.classList;
+  if (!lastItemClasses.contains('valid-feedback') && !lastItemClasses.contains('invalid-feedback')) {
+    const validationInfo = document.createElement('div');
+    group.appendChild(validationInfo);
+  }
+  group.lastChild.textContent = options.text;
+  group.lastChild.classList.remove('invalid-feedback', 'valid-feedback');
+  if (options.isValid) {
+    group.lastChild.classList.add('valid-feedback');
+  } else {
+    group.lastChild.classList.add('invalid-feedback');
+  }
 };
 
 module.exports = {
   generateMainPage,
   subscribeOnViewEvents,
   setAddButtonEnabled,
-  setRSSFieldValid,
-  showSimpleModal,
+  showValidationInfo,
 };
