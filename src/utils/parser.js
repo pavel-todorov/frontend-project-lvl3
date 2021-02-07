@@ -32,6 +32,7 @@ const parseRSSResponse = (responsePromise) => {
         throw new Error('Not supported RSS format');
       }
       const res = getChannelInfo(doc);
+      res.id = respJSON.data.status.url;
       res.items = getChannelItems(doc);
       return res;
     })
