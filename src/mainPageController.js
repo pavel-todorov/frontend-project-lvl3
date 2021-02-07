@@ -2,6 +2,8 @@ const yup = require('yup');
 const {
   setAddButtonEnabled,
   showValidationInfo,
+  updateFeeds,
+  showRSSValue,
 } = require('./mainPageView');
 const {
   download,
@@ -13,8 +15,7 @@ const schema = yup.object().shape({
   link: yup.string().url(),
 });
 
-const mainPageModelChangeCallback = (path, value) => { // previousValue, name
-  // console.log(`mainPageModelChangeCallback: ${path}: ${previousValue} -> ${value} (${name})`);
+const mainPageModelChangeCallback = (path, value, previousValue, name) => { // previousValue, name
   switch (path) {
     case 'view.form.addButtonEnabled':
       setAddButtonEnabled(value);
@@ -22,12 +23,24 @@ const mainPageModelChangeCallback = (path, value) => { // previousValue, name
     case 'view.form.rssValidation':
       showValidationInfo(value);
       break;
+    case 'view.form.rssField':
+      showRSSValue(value);
+      break;
+    case 'view.items':
+      updateFeeds(value);
+      break;
     default:
+      console.log(`Model changed but not processed: ${path}: ${previousValue} -> ${value} (${name})`);
       break;
   }
 };
 
 const isRSSValid = (link) => schema.isValid({ link });
+
+const checkFeedsIsExist = (feeds) => {
+  const found = model.view.items.find((value) => (value.title === feeds.title));
+  return found !== undefined;
+};
 
 const mainPageViewEvents = {
   onRSSChange: (event) => {
@@ -43,15 +56,20 @@ const mainPageViewEvents = {
       if (isLinkValid) {
         parseRSSResponse(download(link))
           .then((feeds) => {
-            console.log(`Feeds: '${JSON.stringify(feeds)}'`);
-            model.view.form.rssValidation = { isValid: true, text: 'Downloaded OK.', showBorder: false };
+            // console.log(`Feeds: '${JSON.stringify(feeds)}'`);
+            if (checkFeedsIsExist(feeds)) {
+              model.view.form.rssValidation = { isValid: false, text: 'Feeds already existed.', showBorder: true };
+            } else {
+              model.view.form.rssValidation = { isValid: true, text: 'Downloaded OK.', showBorder: false };
+              model.view.items.push(feeds);
+              model.view.form.rssField = '';
+            }
           })
           .catch((error) => {
             console.log(`Error while download: ${error}`);
             model.view.form.rssValidation = { isValid: false, text: error, showBorder: true };
           });
         // @todo
-        model.view.form.rssField = '';
       } else {
         model.view.form.rssValidation = { isValid: false, text: 'Invalid link', showBorder: true };
       }

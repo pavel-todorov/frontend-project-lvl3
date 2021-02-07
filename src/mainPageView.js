@@ -1,3 +1,23 @@
+const sortByTitleAsc = (a, b) => {
+  if (a.title < b.title) {
+    return -1;
+  }
+  if (a.title > b.title) {
+    return 1;
+  }
+  return 0;
+};
+
+const sortByTitleDesc = (a, b) => {
+  if (a.title < b.title) {
+    return 1;
+  }
+  if (a.title > b.title) {
+    return -1;
+  }
+  return 0;
+};
+
 const generateMainPage = () => {
   const baseHeader = document.createElement('h1');
   baseHeader.textContent = 'RSS Reader';
@@ -12,7 +32,7 @@ const generateMainPage = () => {
   const input = document.createElement('input');
   input.type = 'text';
   input.classList.add('form-control');
-  input.id = 'cssLink';
+  input.id = 'rssLink';
 
   const formGroup = document.createElement('div');
   formGroup.id = 'rssInputGroup';
@@ -33,20 +53,28 @@ const generateMainPage = () => {
   form.appendChild(button);
 
   const formContaner = document.createElement('div');
-  formContaner.classList.add('mt-5');
   formContaner.appendChild(form);
 
-  const main = document.createElement('div');
-  main.classList.add('container');
-  main.appendChild(baseHeader);
-  main.appendChild(tagLine);
-  main.appendChild(formContaner);
+  const header = document.createElement('div');
+  header.classList.add('container', 'mt-5', 'mb-4');
+  header.appendChild(baseHeader);
+  header.appendChild(tagLine);
+  header.appendChild(formContaner);
 
-  return main;
+  const feeds = document.createElement('div');
+  feeds.id = 'feedsContainer';
+  feeds.classList.add('container', 'mt-4', 'mb-5');
+
+  const content = document.createElement('div');
+  content.classList.add('container');
+  content.appendChild(header);
+  content.appendChild(feeds);
+
+  return content;
 };
 
 const subscribeOnViewEvents = (events) => {
-  document.querySelector('#cssLink').addEventListener('input', events.onRSSChange);
+  document.querySelector('#rssLink').addEventListener('input', events.onRSSChange);
   document.querySelector('#addButton').addEventListener('click', events.onAddRSSClicked);
 };
 
@@ -55,7 +83,7 @@ const setAddButtonEnabled = (enabled) => {
 };
 
 const showValidationInfo = (options) => {
-  const input = document.querySelector('#cssLink');
+  const input = document.querySelector('#rssLink');
   if (!options.showBorder) {
     input.classList.remove('is-invalid');
   } else {
@@ -78,9 +106,62 @@ const showValidationInfo = (options) => {
   }
 };
 
+const updateFeeds = (feedsArray) => {
+  const feedsContainer = document.querySelector('#feedsContainer');
+  feedsContainer.innerHTML = '';
+
+  const feeds = feedsArray.map((feed) => ({ title: feed.title, description: feed.description }));
+  feeds.sort(sortByTitleAsc);
+  const items = [];
+  feedsArray.forEach((feed) => {
+    items.push(...feed.items);
+  });
+  items.sort(sortByTitleDesc);
+
+  if (feeds.length > 0) {
+    const feedsHeader = document.createElement('h2');
+    feedsHeader.textContent = 'Feeds';
+
+    const feedsTableBody = document.createElement('tbody');
+
+    const feedsTable = document.createElement('table');
+    feedsTable.classList.add('table');
+    feedsTable.appendChild(feedsTableBody);
+
+    feedsContainer.appendChild(feedsHeader);
+    feedsContainer.appendChild(feedsTable);
+
+    const feedsTableItems = feeds.map((feed) => `<tr><td><h3>${feed.title}</h3><p>${feed.description}</p></td></tr>`).join('\n');
+    feedsTableBody.innerHTML = feedsTableItems;
+  }
+
+  if (items.length > 0) {
+    const itemsHeader = document.createElement('h2');
+    itemsHeader.textContent = 'Items';
+
+    const itemsTableBody = document.createElement('tbody');
+
+    const itemsTable = document.createElement('table');
+    itemsTable.classList.add('table');
+    itemsTable.appendChild(itemsTableBody);
+
+    feedsContainer.appendChild(itemsHeader);
+    feedsContainer.appendChild(itemsTable);
+
+    const itemsTableItems = items.map((item) => `<tr><td><h5>${item.title}</h5><p>${item.description}</p></td></tr>`).join('\n');
+    itemsTableBody.innerHTML = itemsTableItems;
+  }
+};
+
+const showRSSValue = (value) => {
+  document.querySelector('#rssLink').value = value;
+};
+
 module.exports = {
   generateMainPage,
   subscribeOnViewEvents,
   setAddButtonEnabled,
   showValidationInfo,
+  updateFeeds,
+  showRSSValue,
 };
