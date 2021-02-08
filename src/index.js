@@ -1,16 +1,19 @@
-import './js/bootstrap.min';
-import './css/bootstrap.min.css';
+import './libs/bootstrap/js/bootstrap.min';
+import './libs/bootstrap/css/bootstrap.min.css';
 import {
   generateMainPage,
   subscribeOnViewEvents,
-} from './mainPageView';
-import initMainPageModel from './mainPageModel';
+} from './mainPage/mainPageView';
+import initMainPageModel from './mainPage/mainPageModel';
 import {
   mainPageModelChangeCallback,
   setMainPageModel,
   mainPageViewEvents,
-} from './mainPageController';
+} from './mainPage/mainPageController';
+import { initTranslations } from './utils/translations/translations';
 
-document.body.appendChild(generateMainPage());
-setMainPageModel(initMainPageModel(mainPageModelChangeCallback));
-subscribeOnViewEvents(mainPageViewEvents);
+initTranslations().then(() => {
+  document.body.appendChild(generateMainPage());
+  setMainPageModel(initMainPageModel(mainPageModelChangeCallback));
+  subscribeOnViewEvents(mainPageViewEvents);
+});

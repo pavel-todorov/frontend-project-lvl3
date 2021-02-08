@@ -7,8 +7,10 @@ const {
 } = require('./mainPageView');
 const {
   download,
-} = require('./utils/network');
-const { parseRSSResponse } = require('./utils/parser');
+} = require('../utils/network');
+const { parseRSSResponse } = require('../utils/parser');
+const i18next = require('i18next');
+const i18n = i18next.default || i18next;
 
 let model;
 const schema = yup.object().shape({
@@ -58,9 +60,9 @@ const mainPageViewEvents = {
           .then((feeds) => {
             // console.log(`Feeds: '${JSON.stringify(feeds)}'`);
             if (checkFeedsIsExist(feeds)) {
-              model.view.form.rssValidation = { isValid: false, text: 'Feeds already existed.', showBorder: true };
+              model.view.form.rssValidation = { isValid: false, text: i18n.t('mainPage.form.validation.existedField'), showBorder: true };
             } else {
-              model.view.form.rssValidation = { isValid: true, text: 'Downloaded OK.', showBorder: false };
+              model.view.form.rssValidation = { isValid: true, text: i18n.t('mainPage.form.validation.ok'), showBorder: false };
               model.view.items.push(feeds);
               model.view.form.rssField = '';
             }
@@ -69,9 +71,8 @@ const mainPageViewEvents = {
             console.log(`Error while download: ${error}`);
             model.view.form.rssValidation = { isValid: false, text: error, showBorder: true };
           });
-        // @todo
       } else {
-        model.view.form.rssValidation = { isValid: false, text: 'Invalid link', showBorder: true };
+        model.view.form.rssValidation = { isValid: false, text: i18n.t('mainPage.form.validation.invalidLink'), showBorder: true };
       }
     });
   },

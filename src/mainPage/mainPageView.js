@@ -1,3 +1,6 @@
+const i18next = require('i18next');
+const i18n = i18next.default || i18next;
+
 const sortByTitleAsc = (a, b) => {
   if (a.title < b.title) {
     return -1;
@@ -20,16 +23,17 @@ const sortByTitleDesc = (a, b) => {
 
 const generateMainPage = () => {
   const baseHeader = document.createElement('h1');
-  baseHeader.textContent = 'RSS Reader';
+  baseHeader.textContent = i18n.t('mainPage.title');
 
   const tagLine = document.createElement('summary');
-  tagLine.textContent = 'Start reading RSS today! It is easy, it is nicely.';
+  tagLine.textContent = i18n.t('mainPage.summary');
 
   const label = document.createElement('span');
   label.classList.add('input-group-text');
-  label.textContent = 'RSS link:';
+  label.textContent = i18n.t('mainPage.form.inputLabel');
 
   const input = document.createElement('input');
+  input.setAttribute('required', '');
   input.type = 'text';
   input.classList.add('form-control');
   input.id = 'rssLink';
@@ -45,10 +49,11 @@ const generateMainPage = () => {
   button.classList.add('btn', 'btn-primary');
   button.id = 'addButton';
   button.disabled = true;
-  button.textContent = 'Add';
+  button.textContent = i18n.t('mainPage.form.submitButtonText');
 
   const form = document.createElement('form');
-  form.classList.add('container');
+  form.classList.add('container', 'mt-3', 'needs-validation');
+  form.setAttribute('novalidate', '');
   form.appendChild(formGroup);
   form.appendChild(button);
 
@@ -83,6 +88,7 @@ const setAddButtonEnabled = (enabled) => {
 };
 
 const showValidationInfo = (options) => {
+  console.log(`showValidationInfo: ${JSON.stringify(options)}`);
   const input = document.querySelector('#rssLink');
   if (!options.showBorder) {
     input.classList.remove('is-invalid');
@@ -120,7 +126,7 @@ const updateFeeds = (feedsArray) => {
 
   if (feeds.length > 0) {
     const feedsHeader = document.createElement('h2');
-    feedsHeader.textContent = 'Feeds';
+    feedsHeader.textContent = i18n.t('mainPage.tables.feeds.name');
 
     const feedsTableBody = document.createElement('tbody');
 
@@ -137,7 +143,7 @@ const updateFeeds = (feedsArray) => {
 
   if (items.length > 0) {
     const itemsHeader = document.createElement('h2');
-    itemsHeader.textContent = 'Items';
+    itemsHeader.textContent = i18n.t('mainPage.tables.items.name');;
 
     const itemsTableBody = document.createElement('tbody');
 
