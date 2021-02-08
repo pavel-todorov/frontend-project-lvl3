@@ -69,7 +69,7 @@ const mainPageViewEvents = {
           })
           .catch((error) => {
             console.log(`Error while download: ${error}`);
-            model.view.form.rssValidation = { isValid: false, text: error, showBorder: true };
+            model.view.form.rssValidation = { isValid: false, text: i18n.t(error), showBorder: true };
           });
       } else {
         model.view.form.rssValidation = { isValid: false, text: i18n.t('mainPage.form.validation.invalidLink'), showBorder: true };

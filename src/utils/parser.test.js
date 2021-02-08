@@ -19,11 +19,11 @@ test('RSS good response parsing', async () => {
 test('RSS good response with bad data parsing', async () => {
   const response = fs.promises.readFile(getFixturePath('bad_response.txt'), 'utf8')
     .then((response) => JSON.parse(response));
-  await expect(parseRSSResponse(response)).rejects.toThrow('Response status is not OK');
+  await expect(parseRSSResponse(response)).rejects.toThrow('errors.badResponseStatus');
 });
 
 test('RSS bad http response parsing', async () => {
   const response = fs.promises.readFile(getFixturePath('bad_http_response.txt'), 'utf8')
     .then((response) => JSON.parse(response));
-  await expect(parseRSSResponse(response)).rejects.toThrow('Response status is not OK');
+  await expect(parseRSSResponse(response)).rejects.toThrow('errors.badResponseStatus');
 });

@@ -1,6 +1,4 @@
 const checkIsValidRSS = (doc) => (doc.querySelector('rss') !== null);
-const i18next = require('i18next');
-const i18n = i18next.default || i18next;
 
 const getChannelInfo = (doc) => {
   const title = doc.querySelector('channel title').textContent;
@@ -26,7 +24,7 @@ const parseRSSResponse = (responsePromise) => {
       // console.log(`Response: ${JSON.stringify(response)}`);
       const respJSON = response;
       if (respJSON.status !== 200 || respJSON.data.status.http_code !== 200) {
-        throw new Error(i18n.t('errors.badResponseStatus'));
+        throw new Error('errors.badResponseStatus');
       }
       const domparser = new DOMParser();
       const doc = domparser.parseFromString(respJSON.data.contents, 'text/xml');
