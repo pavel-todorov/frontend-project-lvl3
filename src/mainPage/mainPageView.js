@@ -90,9 +90,11 @@ const setAddButtonEnabled = (enabled) => {
 const showValidationInfo = (options) => {
   console.log(`showValidationInfo: ${JSON.stringify(options)}`);
   const input = document.querySelector('#rssLink');
-  if (!options.showBorder) {
-    input.classList.remove('is-invalid');
-  } else {
+  input.classList.remove('is-invalid', 'is-valid');
+  if (options.showBorder && options.isValid) {
+    input.classList.add('is-valid');
+  } 
+  if (options.showBorder && !options.isValid) {
     input.classList.add('is-invalid');
   }
 
