@@ -1,25 +1,10 @@
 const i18next = require('i18next');
 const i18n = i18next.default || i18next;
 
-const sortByTitleAsc = (a, b) => {
-  if (a.title < b.title) {
-    return -1;
-  }
-  if (a.title > b.title) {
-    return 1;
-  }
-  return 0;
-};
-
-const sortByTitleDesc = (a, b) => {
-  if (a.title < b.title) {
-    return 1;
-  }
-  if (a.title > b.title) {
-    return -1;
-  }
-  return 0;
-};
+const {
+  sortByTitleDesc,
+  // sortByTitleAsc,
+} = require('../utils/sorting');
 
 const generateMainPage = () => {
   const baseHeader = document.createElement('h1');
@@ -119,7 +104,7 @@ const updateFeeds = (feedsArray) => {
   feedsContainer.innerHTML = '';
 
   const feeds = feedsArray.map((feed) => ({ title: feed.title, description: feed.description }));
-  feeds.sort(sortByTitleAsc);
+  // feeds.sort(sortByTitleAsc);
   const items = [];
   feedsArray.forEach((feed) => {
     items.push(...feed.items);
