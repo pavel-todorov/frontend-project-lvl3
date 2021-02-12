@@ -17,6 +17,7 @@ const translation = {
       },
       items: {
         name: 'Items',
+        previewButtonTitle: 'Preview',
       }
     },
   },

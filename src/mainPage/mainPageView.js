@@ -63,7 +63,9 @@ const generateMainPage = () => {
   return content;
 };
 
+let viewEventsSubscribtions;
 const subscribeOnViewEvents = (events) => {
+  viewEventsSubscribtions = events;
   document.querySelector('#rssLink').addEventListener('input', events.onRSSChange);
   document.querySelector('#addButton').addEventListener('click', events.onAddRSSClicked);
 };
@@ -137,11 +139,35 @@ const updateFeeds = (feedsArray) => {
     const itemsTable = document.createElement('table');
     itemsTable.classList.add('table');
     itemsTable.appendChild(itemsTableBody);
+    itemsTable.addEventListener('click', (event) => { 
+      if (event.target.classList.contains('preview') && event.target.dataset.id !== undefined) {
+        viewEventsSubscribtions.onPreviewClicked(event);
+      }
+    });
 
     feedsContainer.appendChild(itemsHeader);
     feedsContainer.appendChild(itemsTable);
 
-    const itemsTableItems = items.map((item) => `<tr><td><h5>${item.title}</h5><p>${item.description}</p></td></tr>`).join('\n');
+    const itemsTableItems = items.map((item) => {
+      let weight = 'font-weight-nomal';
+      if (item.isNew) {
+        weight = 'font-weight-bold';
+      }
+      return `
+        <tr>
+          <td>
+            <div class="row">
+              <h5 class="${weight} col-10">${item.title}</h5>
+              <button
+                type="button"
+                class="btn btn-info col-2 preview"
+                data-id="${item.link}">
+                  ${i18n.t('mainPage.tables.items.previewButtonTitle')}
+              </button>
+            </div>
+            <p>${item.description}</p>
+          </td>
+        </tr>`}).join('\n');
     itemsTableBody.innerHTML = itemsTableItems;
   }
 };

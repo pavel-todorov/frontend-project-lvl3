@@ -35,6 +35,9 @@ const updateArrayWithItems = (source, toUpdate) => {
   sourceMap.forEach((feeds) => {
     const items = [];
     feeds.map.forEach((item) => {
+      if (item.isNew === undefined) {
+        item.isNew = true;
+      }
       items.push(item);
     });
     items.sort(sortByPubDateDesc);

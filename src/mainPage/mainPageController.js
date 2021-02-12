@@ -91,6 +91,7 @@ const mainPageViewEvents = {
               model.view.form.rssValidation = { isValid: true, text: i18n.t('mainPage.form.validation.ok'), showBorder: true };
               const newItems = updateArrayWithItems(model.view.items, [ feeds ] );
               model.view.items = newItems;
+              console.log(`Model: '${JSON.stringify(model.view.items)}'`);
               // model.view.items.push(feeds);
             }
           })
@@ -102,6 +103,9 @@ const mainPageViewEvents = {
         model.view.form.rssValidation = { isValid: false, text: i18n.t('mainPage.form.validation.invalidLink'), showBorder: true };
       }
     });
+  },
+  onPreviewClicked: (event) => {
+    console.log(`Preview clicked: ${event.target.dataset.id}`);
   },
 };
 
