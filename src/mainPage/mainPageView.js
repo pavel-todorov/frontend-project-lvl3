@@ -165,7 +165,6 @@ const updateFeeds = (feedsArray) => {
                   ${i18n.t('mainPage.tables.items.previewButtonTitle')}
               </button>
             </div>
-            <p>${item.description}</p>
           </td>
         </tr>`}).join('\n');
     itemsTableBody.innerHTML = itemsTableItems;

@@ -105,7 +105,22 @@ const mainPageViewEvents = {
     });
   },
   onPreviewClicked: (event) => {
-    console.log(`Preview clicked: ${event.target.dataset.id}`);
+    const id = event.target.dataset.id;
+    console.log(`Preview clicked: ${id}`);
+    let found;
+    try {
+      model.view.items.forEach((feed) => {
+        found = feed.items.find((item) => item.link === id);
+        if (found !== undefined) {
+          console.log(`Found: ${JSON.stringify(found)}`);
+          throw {};
+        }
+      });
+    } catch(exeption) {
+      // @todo show dialog
+      found.isNew = false;
+      mainPageModelChangeCallback('view.items', model.view.items, []);
+    }
   },
 };
 
