@@ -4,6 +4,7 @@ const {
   showValidationInfo,
   updateFeeds,
   showRSSValue,
+  showModal,
 } = require('./mainPageView');
 const {
   download,
@@ -117,7 +118,7 @@ const mainPageViewEvents = {
         }
       });
     } catch(exeption) {
-      // @todo show dialog
+      showModal(found.title, found.description);
       found.isNew = false;
       mainPageModelChangeCallback('view.items', model.view.items, []);
     }

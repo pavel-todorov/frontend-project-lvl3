@@ -1,5 +1,5 @@
-import './libs/bootstrap/js/bootstrap.min';
-import './libs/bootstrap/css/bootstrap.min.css';
+import './libs/bootstrap/js/bootstrap';
+import './libs/bootstrap/css/bootstrap.css';
 import {
   generateMainPage,
   subscribeOnViewEvents,
@@ -11,6 +11,7 @@ import {
   mainPageViewEvents,
 } from './mainPage/mainPageController';
 import { initTranslations } from './utils/translations/translations';
+import 'webpack-icons-installer/bootstrap';
 
 initTranslations().then(() => {
   document.body.appendChild(generateMainPage());

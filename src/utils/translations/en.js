@@ -20,6 +20,10 @@ const translation = {
         previewButtonTitle: 'Preview',
       }
     },
+    modal: {
+      closeButton: 'Close',
+      fullArticleButton: 'Full article',
+    },
   },
   errors: {
     badResponseStatus: 'Response status is not OK',

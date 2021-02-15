@@ -1,5 +1,6 @@
 const i18next = require('i18next');
 const i18n = i18next.default || i18next;
+const bootstrap = require('../libs/bootstrap/js/bootstrap');
 
 const {
   sortByTitleDesc,
@@ -55,8 +56,32 @@ const generateMainPage = () => {
   feeds.id = 'feedsContainer';
   feeds.classList.add('container', 'mt-4', 'mb-5');
 
+  const modals = document.createElement('div');
+  modals.innerHTML = `
+      <div class="modal" tabindex="-1" id="simpleModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalTitle"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p id="modalBody"></p>
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-primary">${i18n.t('mainPage.modal.fullArticleButton')}</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">${i18n.t('mainPage.modal.closeButton')}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
   const content = document.createElement('div');
   content.classList.add('container');
+  content.appendChild(modals);
   content.appendChild(header);
   content.appendChild(feeds);
 
@@ -175,6 +200,13 @@ const showRSSValue = (value) => {
   document.querySelector('#rssLink').value = value;
 };
 
+const showModal = (title, body) => {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalBody').textContent = body;
+  var modal = new bootstrap.Modal(document.getElementById('simpleModal'));
+  modal.show();
+};
+
 module.exports = {
   generateMainPage,
   subscribeOnViewEvents,
@@ -182,4 +214,5 @@ module.exports = {
   showValidationInfo,
   updateFeeds,
   showRSSValue,
+  showModal,
 };
