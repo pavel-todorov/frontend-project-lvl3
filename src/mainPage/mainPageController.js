@@ -101,11 +101,11 @@ const mainPageViewEvents = {
             }
           })
           .catch((error) => {
-            if (error.message.startsWith('errors.')) {
-              model.view.form.rssValidation = { isValid: false, text: i18n.t(error.message), showBorder: true };
-            } else {
+            // if (error.message.startsWith('errors.')) {
+            model.view.form.rssValidation = { isValid: false, text: i18n.t(error.message), showBorder: true };
+            /*} else {
               model.view.form.rssValidation = { isValid: false, text: i18n.t('errors.badResponseStatus'), showBorder: true };
-            }
+            }*/
           });
       } else {
         // console.log('onAddRSSClicked: not valid');
