@@ -4,7 +4,6 @@ const bootstrap = require('../libs/bootstrap/js/bootstrap');
 
 const {
   sortByTitleDesc,
-  // sortByTitleAsc,
 } = require('../utils/sorting');
 
 const generateForm = () => {
@@ -37,10 +36,7 @@ const generateForm = () => {
   form.appendChild(formGroup);
   form.appendChild(button);
 
-  const formContaner = document.createElement('div');
-  formContaner.appendChild(form);
-
-  return formContaner;
+  return document.createElement('div').appendChild(form);
 };
 
 const generateModals = () => {
@@ -162,6 +158,27 @@ const generateFeedsTable = (feeds) => {
   }
 };
 
+const generateItemRow = (item) => {
+  let weight = 'font-weight-nomal';
+  if (item.isNew) {
+    weight = 'font-weight-bold';
+  }
+  return `
+    <tr>
+      <td>
+        <div class="row">
+          <h5 class="${weight} col-10">${item.title}</h5>
+          <button
+            type="button"
+            class="btn btn-info col-2 preview"
+            data-id="${item.link}">
+              ${i18n.t('mainPage.tables.items.previewButtonTitle')}
+          </button>
+        </div>
+      </td>
+    </tr>`
+};
+
 const generateItemsTable = (items) => {
   if (items.length > 0) {
     const itemsHeader = document.createElement('h2');
@@ -178,25 +195,7 @@ const generateItemsTable = (items) => {
       }
     });
 
-    const itemsTableItems = items.map((item) => {
-      let weight = 'font-weight-nomal';
-      if (item.isNew) {
-        weight = 'font-weight-bold';
-      }
-      return `
-        <tr>
-          <td>
-            <div class="row">
-              <h5 class="${weight} col-10">${item.title}</h5>
-              <button
-                type="button"
-                class="btn btn-info col-2 preview"
-                data-id="${item.link}">
-                  ${i18n.t('mainPage.tables.items.previewButtonTitle')}
-              </button>
-            </div>
-          </td>
-        </tr>`}).join('\n');
+    const itemsTableItems = items.map((item) => generateItemRow(item)).join('\n');
     itemsTableBody.innerHTML = itemsTableItems;
     return [itemsHeader, itemsTable];
   } else {
