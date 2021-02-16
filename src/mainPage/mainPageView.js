@@ -14,6 +14,7 @@ const generateForm = () => {
   const input = document.createElement('input');
   input.name = "url";
   input.setAttribute('required', '');
+  input.setAttribute('aria-label', 'url');
   input.type = 'text';
   input.classList.add('form-control');
   input.id = 'rssLink';
@@ -26,6 +27,7 @@ const generateForm = () => {
 
   const button = document.createElement('button');
   button.name = 'add';
+  button.setAttribute('aria-label', 'add');
   button.type = 'submit';
   button.classList.add('btn', 'btn-primary');
   button.id = 'addButton';
