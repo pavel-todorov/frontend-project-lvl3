@@ -13,6 +13,7 @@ const { parseRSSResponse } = require('../utils/parser');
 const i18next = require('i18next');
 const i18n = i18next.default || i18next;
 const { updateArrayWithItems } = require('../utils/arrays');
+const initMainPageModel = require('./mainPageModel');
 
 let model;
 let feedsUpdateTimerId;
@@ -29,6 +30,7 @@ const updateFeedsHandler = () => {
       const updatedItems = updateArrayWithItems(model.view.items, results);
       model.view.items = updatedItems;
     });
+  // setMainPageModel(initMainPageModel(mainPageModelChangeCallback, {...model}));
   feedsUpdateTimerId = window.setTimeout(updateFeedsHandler, 5 * 1000);
 };
 
@@ -45,6 +47,7 @@ const mainPageModelChangeCallback = (path, value, previousValue, name) => { // p
       setAddButtonEnabled(value);
       break;
     case 'view.form.rssValidation':
+      console.log('New RSS validation');
       showValidationInfo(value);
       break;
     case 'view.form.rssField':
@@ -78,11 +81,12 @@ const mainPageViewEvents = {
     model.view.form.addButtonEnabled = model.view.form.rssField !== '';
   },
   onAddRSSClicked: (event) => {
-    // console.log('onAddRSSClicked');
+    console.log(`onAddRSSClicked: ${JSON.stringify(model)}`);
     event.preventDefault();
     const link = model.view.form.rssField;
     isRSSValid(link).then((isLinkValid) => {
       if (isLinkValid) {
+        console.log('onAddRSSClicked: then1');
         parseRSSResponse(download(link))
           .then((feeds) => {
             // console.log(`Feeds: '${JSON.stringify(feeds)}'`);
@@ -92,32 +96,34 @@ const mainPageViewEvents = {
               model.view.form.rssValidation = { isValid: true, text: i18n.t('mainPage.form.validation.ok'), showBorder: true };
               const newItems = updateArrayWithItems(model.view.items, [ feeds ] );
               model.view.items = newItems;
-              console.log(`Model: '${JSON.stringify(model.view.items)}'`);
+              // console.log(`Model: '${JSON.stringify(model.view.items)}'`);
               // model.view.items.push(feeds);
             }
           })
           .catch((error) => {
-            // console.log(`Error while download: ${error}`);
+            console.log(`Error while download: ${error}`);
             model.view.form.rssValidation = { isValid: false, text: i18n.t(error.message), showBorder: true };
           });
       } else {
+        console.log('onAddRSSClicked: not valid');
         model.view.form.rssValidation = { isValid: false, text: i18n.t('mainPage.form.validation.invalidLink'), showBorder: true };
       }
     });
   },
   onPreviewClicked: (event) => {
+    event.preventDefault();
+    model.view.form.rssValidation = { isValid: true, text: '', showBorder: false };
+    model.view.form.rssField = '';
     const id = event.target.dataset.id;
-    console.log(`Preview clicked: ${id}`);
+    // console.log(`Preview clicked: ${id}`);
     let found;
-    try {
-      model.view.items.forEach((feed) => {
-        found = feed.items.find((item) => item.link === id);
-        if (found !== undefined) {
-          console.log(`Found: ${JSON.stringify(found)}`);
-          throw {};
-        }
-      });
-    } catch(exeption) {
+    model.view.items.forEach((feed) => {
+      found = feed.items.find((item) => item.link === id);
+      if (found !== undefined) {
+        // console.log(`Found: ${JSON.stringify(found)}`);
+      }
+    });
+    if (found !== undefined) {
       showModal(found.title, found.description);
       found.isNew = false;
       mainPageModelChangeCallback('view.items', model.view.items, []);

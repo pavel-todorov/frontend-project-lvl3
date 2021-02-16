@@ -58,7 +58,7 @@ const generateMainPage = () => {
 
   const modals = document.createElement('div');
   modals.innerHTML = `
-      <div class="modal" tabindex="-1" id="simpleModal">
+      <div class="modal hide fade" tabindex="-1" id="simpleModal">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -71,7 +71,6 @@ const generateMainPage = () => {
             <p id="modalBody"></p>
           </div>
           <div class="modal-footer">
-          <button type="button" class="btn btn-primary">${i18n.t('mainPage.modal.fullArticleButton')}</button>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">${i18n.t('mainPage.modal.closeButton')}</button>
           </div>
         </div>
@@ -79,6 +78,7 @@ const generateMainPage = () => {
     </div>
   `;
 
+//  <button type="button" class="btn btn-primary">${i18n.t('mainPage.modal.fullArticleButton')}</button>
   const content = document.createElement('div');
   content.classList.add('container');
   content.appendChild(modals);
@@ -93,6 +93,7 @@ const subscribeOnViewEvents = (events) => {
   viewEventsSubscribtions = events;
   document.querySelector('#rssLink').addEventListener('input', events.onRSSChange);
   document.querySelector('#addButton').addEventListener('click', events.onAddRSSClicked);
+  // document.querySelector('button[data-dismiss="modal"]')
 };
 
 const setAddButtonEnabled = (enabled) => {
@@ -203,7 +204,8 @@ const showRSSValue = (value) => {
 const showModal = (title, body) => {
   document.getElementById('modalTitle').textContent = title;
   document.getElementById('modalBody').textContent = body;
-  var modal = new bootstrap.Modal(document.getElementById('simpleModal'));
+  const modalNode = document.getElementById('simpleModal');
+  var modal = new bootstrap.Modal(modalNode);
   modal.show();
 };
 
