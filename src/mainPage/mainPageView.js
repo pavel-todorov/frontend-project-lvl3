@@ -12,6 +12,7 @@ const generateForm = () => {
   label.textContent = i18n.t('mainPage.form.inputLabel');
 
   const input = document.createElement('input');
+  input.name = "url";
   input.setAttribute('required', '');
   input.type = 'text';
   input.classList.add('form-control');
@@ -24,6 +25,7 @@ const generateForm = () => {
   formGroup.appendChild(input);
 
   const button = document.createElement('button');
+  button.name = 'add';
   button.type = 'submit';
   button.classList.add('btn', 'btn-primary');
   button.id = 'addButton';
