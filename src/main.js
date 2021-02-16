@@ -9,12 +9,12 @@ import {
   mainPageViewEvents,
 } from './mainPage/mainPageController';
 import { initTranslations } from './utils/translations/translations';
-  
+
 const init = async () => {
   initTranslations().then(() => {
     document.body.appendChild(generateMainPage());
     setMainPageModel(initMainPageModel(mainPageModelChangeCallback));
-    subscribeOnViewEvents(mainPageViewEvents);  
+    subscribeOnViewEvents(mainPageViewEvents);
   });
 };
 
