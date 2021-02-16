@@ -142,18 +142,7 @@ const showValidationInfo = (options) => {
   }
 };
 
-const updateFeeds = (feedsArray) => {
-  const feedsContainer = document.querySelector('#feedsContainer');
-  feedsContainer.innerHTML = '';
-
-  const feeds = feedsArray.map((feed) => ({ title: feed.title, description: feed.description }));
-  // feeds.sort(sortByTitleAsc);
-  const items = [];
-  feedsArray.forEach((feed) => {
-    items.push(...feed.items);
-  });
-  items.sort(sortByTitleDesc);
-
+const generateFeedsTable = (feeds) => {
   if (feeds.length > 0) {
     const feedsHeader = document.createElement('h2');
     feedsHeader.textContent = i18n.t('mainPage.tables.feeds.name');
@@ -164,13 +153,16 @@ const updateFeeds = (feedsArray) => {
     feedsTable.classList.add('table');
     feedsTable.appendChild(feedsTableBody);
 
-    feedsContainer.appendChild(feedsHeader);
-    feedsContainer.appendChild(feedsTable);
-
     const feedsTableItems = feeds.map((feed) => `<tr><td><h3>${feed.title}</h3><p>${feed.description}</p></td></tr>`).join('\n');
     feedsTableBody.innerHTML = feedsTableItems;
+    return [feedsHeader, feedsTable];
   }
+  else {
+    return [];
+  }
+};
 
+const generateItemsTable = (items) => {
   if (items.length > 0) {
     const itemsHeader = document.createElement('h2');
     itemsHeader.textContent = i18n.t('mainPage.tables.items.name');;
@@ -185,9 +177,6 @@ const updateFeeds = (feedsArray) => {
         viewEventsSubscribtions.onPreviewClicked(event);
       }
     });
-
-    feedsContainer.appendChild(itemsHeader);
-    feedsContainer.appendChild(itemsTable);
 
     const itemsTableItems = items.map((item) => {
       let weight = 'font-weight-nomal';
@@ -209,6 +198,34 @@ const updateFeeds = (feedsArray) => {
           </td>
         </tr>`}).join('\n');
     itemsTableBody.innerHTML = itemsTableItems;
+    return [itemsHeader, itemsTable];
+  } else {
+    return [];
+  }
+};
+
+const updateFeeds = (feedsArray) => {
+  const feedsContainer = document.querySelector('#feedsContainer');
+  feedsContainer.innerHTML = '';
+
+  const feeds = feedsArray.map((feed) => ({ title: feed.title, description: feed.description }));
+  // feeds.sort(sortByTitleAsc);
+  const items = [];
+  feedsArray.forEach((feed) => {
+    items.push(...feed.items);
+  });
+  items.sort(sortByTitleDesc);
+
+  [feedsHeader, feedsTable] = generateFeedsTable(feeds);
+  if (feedsHeader !== undefined) {
+    feedsContainer.appendChild(feedsHeader);
+    feedsContainer.appendChild(feedsTable);
+  }
+
+  [itemsHeader, itemsTable] = generateItemsTable(items);
+  if (itemsHeader !== undefined) {
+    feedsContainer.appendChild(itemsHeader);
+    feedsContainer.appendChild(itemsTable);
   }
 };
 
