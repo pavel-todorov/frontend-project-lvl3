@@ -7,13 +7,7 @@ const {
   // sortByTitleAsc,
 } = require('../utils/sorting');
 
-const generateMainPage = () => {
-  const baseHeader = document.createElement('h1');
-  baseHeader.textContent = i18n.t('mainPage.title');
-
-  const tagLine = document.createElement('summary');
-  tagLine.textContent = i18n.t('mainPage.summary');
-
+const generateForm = () => {
   const label = document.createElement('span');
   label.classList.add('input-group-text');
   label.textContent = i18n.t('mainPage.form.inputLabel');
@@ -46,16 +40,10 @@ const generateMainPage = () => {
   const formContaner = document.createElement('div');
   formContaner.appendChild(form);
 
-  const header = document.createElement('div');
-  header.classList.add('container', 'mt-5', 'mb-4');
-  header.appendChild(baseHeader);
-  header.appendChild(tagLine);
-  header.appendChild(formContaner);
+  return formContaner;
+};
 
-  const feeds = document.createElement('div');
-  feeds.id = 'feedsContainer';
-  feeds.classList.add('container', 'mt-4', 'mb-5');
-
+const generateModals = () => {
   const modals = document.createElement('div');
   modals.innerHTML = `
       <div class="modal hide fade" tabindex="-1" id="simpleModal">
@@ -77,13 +65,40 @@ const generateMainPage = () => {
       </div>
     </div>
   `;
+  //  <button type="button" class="btn btn-primary">${i18n.t('mainPage.modal.fullArticleButton')}</button>
+  return modals;
+};
 
-//  <button type="button" class="btn btn-primary">${i18n.t('mainPage.modal.fullArticleButton')}</button>
+const generateHeader = () => {
+  const baseHeader = document.createElement('h1');
+  baseHeader.textContent = i18n.t('mainPage.title');
+
+  const tagLine = document.createElement('summary');
+  tagLine.textContent = i18n.t('mainPage.summary');
+
+  const formContaner = generateForm();
+
+  const header = document.createElement('div');
+  header.classList.add('container', 'mt-5', 'mb-4');
+  header.appendChild(baseHeader);
+  header.appendChild(tagLine);
+  header.appendChild(formContaner);
+  return header;
+};
+
+const generateFeedsContainer = () => {
+  const feeds = document.createElement('div');
+  feeds.id = 'feedsContainer';
+  feeds.classList.add('container', 'mt-4', 'mb-5');
+  return feeds;
+};
+
+const generateMainPage = () => {
   const content = document.createElement('div');
   content.classList.add('container');
-  content.appendChild(modals);
-  content.appendChild(header);
-  content.appendChild(feeds);
+  content.appendChild(generateModals());
+  content.appendChild(generateHeader());
+  content.appendChild(generateFeedsContainer());
 
   return content;
 };
