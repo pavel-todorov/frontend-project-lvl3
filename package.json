@@ -1,7 +1,7 @@
 {
   "name": "@hexlet/code",
   "module": "@hexlet/code",
-  "main": "./main.js",
+  "main": "./src/main.js",
   "version": "1.0.0",
   "description": "Hexlet frontend project level 3",
   "private": true,
