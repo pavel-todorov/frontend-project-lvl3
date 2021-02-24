@@ -7,7 +7,7 @@ const translation = {
       submitButtonText: 'Add',
       validation: {
         existedField: 'Feeds already exist.',
-        ok: 'RSS успешно загружен',
+        ok: 'RSS успешно загружен adfad',
         invalidLink: 'Ссылка должна быть валидным URL',
       },
     },

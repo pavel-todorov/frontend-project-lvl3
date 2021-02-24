@@ -94,12 +94,8 @@ const generateFeedsContainer = () => {
 };
 
 const generateComments = (text) => {
-  const base = document.querySelector('#base');
-  base.dataset.comment = text;
-  // if (base.lastChild.nodeType === Node.COMMENT_NODE) {
-  //   base.lastChild.remove();
-  // }
-  // base.appendChild(document.createComment(text));
+  // const base = document.querySelector('#base');
+  // base.dataset.comment = text;
 };
 
 const generateMainPage = () => {
