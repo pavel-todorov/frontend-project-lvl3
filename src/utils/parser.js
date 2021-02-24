@@ -9,10 +9,10 @@ const getChannelInfo = (doc) => {
 const getChannelItems = (doc) => {
   const res = [];
   doc.querySelectorAll('channel item').forEach((item) => {
-    title = item.querySelector('title').textContent;
-    description = item.querySelector('description').textContent;
-    link = item.querySelector('link').textContent;
-    pubDate = item.querySelector('pubDate').textContent;
+    const title = item.querySelector('title').textContent;
+    const description = item.querySelector('description').textContent;
+    const link = item.querySelector('link').textContent;
+    const pubDate = item.querySelector('pubDate').textContent;
     res.push({ title, description, pubDate, link });
   });
   return res;
@@ -37,13 +37,13 @@ const parseRSSResponse = (responsePromise) => {
       const baseUrl = decodeURIComponent(url.searchParams.get('url'));
       // console.log(`Base url: ${baseUrl}`);
       res.id = baseUrl;
-      // res.items = getChannelItems(doc);
-      res.items = [{
-        title: 'itm_title',
-        description: 'itm_description',
-        link: 'itm_link',
-        pubDate: 'Wed, 24 Feb 2021 08:04:00 GMT',
-      }];
+      res.items = getChannelItems(doc);
+      // res.items = [{
+      //   title: 'itm_title',
+      //   description: 'itm_description',
+      //   link: 'itm_link',
+      //   pubDate: 'Wed, 24 Feb 2021 08:04:00 GMT',
+      // }];
       return res;
     })
 };
