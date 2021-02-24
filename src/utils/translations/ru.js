@@ -8,7 +8,7 @@ const translation = {
       validation: {
         existedField: 'Feeds already exist.',
         ok: 'RSS успешно загружен',
-        invalidLink: 'Invalid link',
+        invalidLink: 'Ссылка должна быть валидным URL',
       },
     },
     tables: {
