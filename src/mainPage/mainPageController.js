@@ -104,7 +104,7 @@ const mainPageViewEvents = {
             if (error.message.startsWith('errors.')) {
               model.view.form.rssValidation = { isValid: false, text: i18n.t(error.message), showBorder: true };
             } else {
-              model.view.form.rssValidation = { isValid: false, text: error, showBorder: true };
+              model.view.form.rssValidation = { isValid: false, text: `${error}, ${error.toSource()}`, showBorder: true };
             }
           });
       } else {
