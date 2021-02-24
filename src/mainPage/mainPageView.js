@@ -219,13 +219,13 @@ const updateFeeds = (feedsArray) => {
   });
   items.sort(sortByTitleDesc);
 
-  // [feedsHeader, feedsTable] = generateFeedsTable(feeds);
-  // if (feedsHeader !== undefined) {
-  //   feedsContainer.appendChild(feedsHeader);
-  //   feedsContainer.appendChild(feedsTable);
-  // }
+  const [feedsHeader, feedsTable] = generateFeedsTable(feeds);
+  if (feedsHeader !== undefined) {
+    feedsContainer.appendChild(feedsHeader);
+    feedsContainer.appendChild(feedsTable);
+  }
 
-  [itemsHeader, itemsTable] = generateItemsTable(items);
+  const [itemsHeader, itemsTable] = generateItemsTable(items);
   if (itemsHeader !== undefined) {
     feedsContainer.appendChild(itemsHeader);
     feedsContainer.appendChild(itemsTable);
