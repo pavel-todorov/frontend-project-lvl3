@@ -5,6 +5,7 @@ const {
   updateFeeds,
   showRSSValue,
   showModal,
+  generateComments,
 } = require('./mainPageView');
 const {
   download,
@@ -13,7 +14,6 @@ const { parseRSSResponse } = require('../utils/parser');
 const i18next = require('i18next');
 const i18n = i18next.default || i18next;
 const { updateArrayWithItems } = require('../utils/arrays');
-const initMainPageModel = require('./mainPageModel');
 
 let model;
 let feedsUpdateTimerId;
@@ -84,6 +84,7 @@ const mainPageViewEvents = {
     // console.log(`onAddRSSClicked: ${JSON.stringify(model)}`);
     event.preventDefault();
     const link = model.view.form.rssField;
+    generateComments(`onAddRSSClicked: ${link}`);
     isRSSValid(link).then((isLinkValid) => {
       if (isLinkValid) {
         // console.log('onAddRSSClicked: then1');

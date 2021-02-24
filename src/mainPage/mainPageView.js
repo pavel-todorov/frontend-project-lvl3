@@ -93,8 +93,17 @@ const generateFeedsContainer = () => {
   return feeds;
 };
 
+const generateComments = (text) => {
+  const base = document.querySelector('#base');
+  if (base.lastChild.nodeType === Node.COMMENT_NODE) {
+    base.lastChild.remove();
+  }
+  base.appendChild(document.createComment(text));
+};
+
 const generateMainPage = () => {
   const content = document.createElement('div');
+  content.id = 'base';
   content.classList.add('container');
   content.appendChild(generateModals());
   content.appendChild(generateHeader());
@@ -252,4 +261,5 @@ module.exports = {
   updateFeeds,
   showRSSValue,
   showModal,
+  generateComments,
 };
