@@ -124,11 +124,11 @@ const mainPageViewEvents = {
       found = feed.items.find((item) => item.link === id);
       if (found !== undefined) {
         // console.log(`Found: ${JSON.stringify(found)}`);
+        found.isNew = false;
       }
     });
     if (found !== undefined) {
       showModal(found.title, found.description);
-      found.isNew = false;
       mainPageModelChangeCallback('view.items', model.view.items, []);
     }
   },

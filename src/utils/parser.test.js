@@ -16,8 +16,10 @@ test('RSS good response parsing', async () => {
   );
 });
 
-test.each([['bad_response.txt'], ['bad_http_response.txt']])('RSS with %s should trow', async (source) => {
+test.each([
+  ['bad_response.txt', 'errors.notSupportedRSSFormat'],
+  ['bad_http_response.txt', 'errors.badResponseStatus']])('RSS with %s should trow', async (source, expected) => {
   const response = fs.promises.readFile(getFixturePath(source), 'utf8')
     .then((response) => JSON.parse(response));
-  await expect(parseRSSResponse(response)).rejects.toThrow('errors.badResponseStatus');
+  await expect(parseRSSResponse(response)).rejects.toThrow(expected);
 });
