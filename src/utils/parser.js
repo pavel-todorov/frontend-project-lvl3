@@ -32,7 +32,10 @@ const parseRSSResponse = (responsePromise) => {
         throw new Error('errors.notSupportedRSSFormat');
       }
       const res = getChannelInfo(doc);
-      res.id = respJSON.data.status.url;
+      const url = new URL(respJSON.config.url);
+      const baseUrl = decodeURIComponent(url.searchParams.get('url'));
+      // console.log(`Base url: ${baseUrl}`);
+      res.id = baseUrl;
       res.items = getChannelItems(doc);
       return res;
     })
