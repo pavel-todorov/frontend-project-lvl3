@@ -143,23 +143,23 @@ const showValidationInfo = (options) => {
 };
 
 const generateFeedsTable = (feeds) => {
-  // if (feeds.length > 0) {
-  //   const feedsHeader = document.createElement('h2');
-  //   feedsHeader.textContent = i18n.t('mainPage.tables.feeds.name');
+  if (feeds.length > 0) {
+    const feedsHeader = document.createElement('h2');
+    feedsHeader.textContent = i18n.t('mainPage.tables.feeds.name');
 
-  //   const feedsTableBody = document.createElement('tbody');
+    const feedsTableBody = document.createElement('tbody');
 
-  //   const feedsTable = document.createElement('table');
-  //   feedsTable.classList.add('table');
-  //   feedsTable.appendChild(feedsTableBody);
+    const feedsTable = document.createElement('table');
+    feedsTable.classList.add('table');
+    feedsTable.appendChild(feedsTableBody);
 
-  //   const feedsTableItems = feeds.map((feed) => `<tr><td><h3>${feed.title}</h3><p>${feed.description}</p></td></tr>`).join('\n');
-  //   feedsTableBody.innerHTML = feedsTableItems;
-  //   return [feedsHeader, feedsTable];
-  // }
-  // else {
+    const feedsTableItems = feeds.map((feed) => `<tr><td><h3>${feed.title}</h3><p>${feed.description}</p></td></tr>`).join('\n');
+    feedsTableBody.innerHTML = feedsTableItems;
+    return [feedsHeader, feedsTable];
+  }
+  else {
     return [];
-  // }
+  }
 };
 
 const generateItemRow = (item) => {
@@ -219,11 +219,11 @@ const updateFeeds = (feedsArray) => {
   });
   items.sort(sortByTitleDesc);
 
-  [feedsHeader, feedsTable] = generateFeedsTable(feeds);
-  if (feedsHeader !== undefined) {
-    feedsContainer.appendChild(feedsHeader);
-    feedsContainer.appendChild(feedsTable);
-  }
+  // [feedsHeader, feedsTable] = generateFeedsTable(feeds);
+  // if (feedsHeader !== undefined) {
+  //   feedsContainer.appendChild(feedsHeader);
+  //   feedsContainer.appendChild(feedsTable);
+  // }
 
   [itemsHeader, itemsTable] = generateItemsTable(items);
   if (itemsHeader !== undefined) {
