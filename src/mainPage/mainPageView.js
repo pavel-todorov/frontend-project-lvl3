@@ -95,10 +95,11 @@ const generateFeedsContainer = () => {
 
 const generateComments = (text) => {
   const base = document.querySelector('#base');
-  if (base.lastChild.nodeType === Node.COMMENT_NODE) {
-    base.lastChild.remove();
-  }
-  base.appendChild(document.createComment(text));
+  base.dataset.comment = text;
+  // if (base.lastChild.nodeType === Node.COMMENT_NODE) {
+  //   base.lastChild.remove();
+  // }
+  // base.appendChild(document.createComment(text));
 };
 
 const generateMainPage = () => {
