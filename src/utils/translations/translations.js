@@ -4,7 +4,7 @@ const enTranslation = require('./en');
 const ruTranslation = require('./ru');
 
 const initTranslations = () => i18n.init({
-    lng: 'en',
+    lng: 'ru',
     debug: true,
     resources: {
       en: {
