@@ -94,8 +94,8 @@ const generateFeedsContainer = () => {
 };
 
 const generateComments = (text) => {
-  // const base = document.querySelector('#base');
-  // base.dataset.comment = text;
+  const base = document.querySelector('#base');
+  base.dataset.comment = text;
 };
 
 const generateMainPage = () => {
