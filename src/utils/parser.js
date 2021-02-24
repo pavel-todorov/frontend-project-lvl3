@@ -31,13 +31,19 @@ const parseRSSResponse = (responsePromise) => {
       if (!checkIsValidRSS(doc)) {
         throw new Error('errors.notSupportedRSSFormat');
       }
-      // const res = getChannelInfo(doc);
-      const res = { title: 'title', description: 'description' };
+      const res = getChannelInfo(doc);
+      // const res = { title: 'title', description: 'description' };
       const url = new URL(respJSON.config.url);
       const baseUrl = decodeURIComponent(url.searchParams.get('url'));
       // console.log(`Base url: ${baseUrl}`);
       res.id = baseUrl;
-      res.items = getChannelItems(doc);
+      // res.items = getChannelItems(doc);
+      res.items = [{
+        title: 'itm_title',
+        description: 'itm_description',
+        link: 'itm_link',
+        pubDate: 'Wed, 24 Feb 2021 08:04:00 GMT',
+      }];
       return res;
     })
 };
