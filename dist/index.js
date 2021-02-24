@@ -2469,7 +2469,7 @@ eval("const {\n  sortByPubDateDesc,\n  sortByTitleAsc,\n} = __webpack_require__(
   \******************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const axios = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n\nconst download = (link) => {\n  return axios\n    .get(`https://hexlet-allorigins.herokuapp.com/get?url=${encodeURIComponent(link)}&disabledCache=true&timestamp=${new Date().getTime()}`);\n  // .get(`https://hexlet-allorigins.herokuapp.com/get?url=${encodeURIComponent(link)}&disabledCache=true`);\n};\n\nmodule.exports = {\n  download,\n};\n\n//# sourceURL=webpack://@hexlet/code/./src/utils/network.js?");
+eval("const axios = __webpack_require__(/*! axios */ \"./node_modules/axios/index.js\");\n\nconst download = (link) => {\n  return axios\n    // .get(`https://hexlet-allorigins.herokuapp.com/get?url=${encodeURIComponent(link)}&disabledCache=true&timestamp=${new Date().getTime()}`);\n    .get(`https://hexlet-allorigins.herokuapp.com/get?url=${encodeURIComponent(link)}&disabledCache=true`);\n};\n\nmodule.exports = {\n  download,\n};\n\n//# sourceURL=webpack://@hexlet/code/./src/utils/network.js?");
 
 /***/ }),
 
