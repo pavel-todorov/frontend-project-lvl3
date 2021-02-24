@@ -89,16 +89,16 @@ const mainPageViewEvents = {
         // console.log('onAddRSSClicked: then1');
         parseRSSResponse(download(link))
           .then((feeds) => {
-            // // console.log(`Feeds: '${JSON.stringify(feeds)}'`);
-            // if (checkFeedsIsExist(feeds)) {
-            //   model.view.form.rssValidation = { isValid: false, text: i18n.t('mainPage.form.validation.existedField'), showBorder: true };
-            // } else {
-            //   model.view.form.rssValidation = { isValid: true, text: i18n.t('mainPage.form.validation.ok'), showBorder: true };
-            //   const newItems = updateArrayWithItems(model.view.items, [ feeds ] );
-            //   model.view.items = newItems;
-            //   // console.log(`Model: '${JSON.stringify(model.view.items)}'`);
-            //   // model.view.items.push(feeds);
-            // }
+            // console.log(`Feeds: '${JSON.stringify(feeds)}'`);
+            if (checkFeedsIsExist(feeds)) {
+              model.view.form.rssValidation = { isValid: false, text: i18n.t('mainPage.form.validation.existedField'), showBorder: true };
+            } else {
+              model.view.form.rssValidation = { isValid: true, text: i18n.t('mainPage.form.validation.ok'), showBorder: true };
+              const newItems = updateArrayWithItems(model.view.items, [ feeds ] );
+              model.view.items = newItems;
+              // console.log(`Model: '${JSON.stringify(model.view.items)}'`);
+              // model.view.items.push(feeds);
+            }
           })
           .catch((error) => {
             if (error.message.startsWith('errors.')) {

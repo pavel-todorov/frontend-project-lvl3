@@ -31,7 +31,8 @@ const parseRSSResponse = (responsePromise) => {
       if (!checkIsValidRSS(doc)) {
         throw new Error('errors.notSupportedRSSFormat');
       }
-      const res = getChannelInfo(doc);
+      // const res = getChannelInfo(doc);
+      const res = { title: 'title', description: 'description' };
       const url = new URL(respJSON.config.url);
       const baseUrl = decodeURIComponent(url.searchParams.get('url'));
       // console.log(`Base url: ${baseUrl}`);
