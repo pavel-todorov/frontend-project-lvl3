@@ -95,6 +95,7 @@ const mainPageViewEvents = {
               model.view.form.rssValidation = { isValid: false, text: i18n.t('mainPage.form.validation.existedField'), showBorder: true };
             } else {
               model.view.form.rssValidation = { isValid: true, text: i18n.t('mainPage.form.validation.ok'), showBorder: true };
+              model.view.form.rssField = '';
               const newItems = updateArrayWithItems(model.view.items, [ feeds ] );
               model.view.items = newItems;
               // console.log(`Model: '${JSON.stringify(model.view.items)}'`);
