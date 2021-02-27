@@ -1,14 +1,14 @@
-import {
-  generateMainPage,
-  subscribeOnViewEvents,
-} from './mainPage/mainPageView';
-import initMainPageModel from './mainPage/mainPageModel';
-import {
+const initMainPageModel = require('./mainPage/mainPageModel');
+const {
   mainPageModelChangeCallback,
   setMainPageModel,
   mainPageViewEvents,
-} from './mainPage/mainPageController';
-import { initTranslations } from './utils/translations/translations';
+} = require('./mainPage/mainPageController');
+const { initTranslations } = require('./utils/translations/translations');
+const {
+  generateMainPage,
+  subscribeOnViewEvents,
+} = require('./mainPage/mainPageView');
 
 const init = async () => {
   initTranslations().then(() => {

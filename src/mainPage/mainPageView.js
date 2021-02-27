@@ -1,6 +1,6 @@
-const i18next = require('i18next');
-const i18n = i18next.default || i18next;
 const bootstrap = require('../libs/bootstrap/js/bootstrap');
+const { i18nextInstance } = require('../utils/translations/translations');
+const i18n = i18nextInstance;
 
 const {
   sortByTitleDesc,
