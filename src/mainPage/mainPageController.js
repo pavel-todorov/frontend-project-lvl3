@@ -11,8 +11,8 @@ const {
   download,
 } = require('../utils/network');
 const { parseRSSResponse } = require('../utils/parser');
-const i18next = require('i18next');
-const i18n = i18next.default || i18next;
+const { i18nextInstance } = require('../utils/translations/translations');
+const i18n = i18nextInstance;
 const { updateArrayWithItems } = require('../utils/arrays');
 
 let model;
@@ -88,7 +88,7 @@ const mainPageViewEvents = {
     model.view.form.addButtonEnabled = false;
     isRSSValid(link).then((isLinkValid) => {
       if (isLinkValid) {
-        // console.log('onAddRSSClicked: then1');
+        console.log('onAddRSSClicked: then1');
         parseRSSResponse(download(link))
           .then((feeds) => {
             // console.log(`Feeds: '${JSON.stringify(feeds)}'`);
