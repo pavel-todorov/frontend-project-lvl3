@@ -18,6 +18,8 @@ const init = async () => {
     document.body.appendChild(generateMainPage(i18nFunction));
     setMainPageModel(initMainPageModel(mainPageModelChangeCallback));
     subscribeOnViewEvents(mainPageViewEvents);
+  }).catch((err) => {
+    document.body.textContent = `Error while initializing page: ${err}`;
   });
 };
 
