@@ -11,8 +11,8 @@ const {
   download,
 } = require('../utils/network');
 const { parseRSSResponse } = require('../utils/parser');
-const { i18nextInstance } = require('../utils/translations/translations');
-const i18n = i18nextInstance;
+// const { i18nextInstance } = require('../utils/translations/translations');
+// const i18n = i18nextInstance.default || i18nextInstance;
 const { updateArrayWithItems } = require('../utils/arrays');
 
 let model;
@@ -20,6 +20,13 @@ let feedsUpdateTimerId;
 const schema = yup.object().shape({
   link: yup.string().url(),
 });
+
+var i18nFunction;
+
+const initMainPageController = (i18nFunc) => {
+  i18nFunction = i18nFunc;
+  console.log(`initMaionPageController(${typeof i18nFunction})`);
+};
 
 const updateFeedsHandler = () => {
   console.log(`Time to update feeds: ${new Date()}`);
@@ -93,10 +100,10 @@ const mainPageViewEvents = {
           .then((feeds) => {
             // console.log(`Feeds: '${JSON.stringify(feeds)}'`);
             if (checkFeedsIsExist(feeds)) {
-              model.view.form.rssValidation = { isValid: false, text: i18n.t('mainPage.form.validation.existedField'), showBorder: true };
+              model.view.form.rssValidation = { isValid: false, text: i18nFunction('mainPage.form.validation.existedField'), showBorder: true };
               model.view.form.addButtonEnabled = true;
             } else {
-              model.view.form.rssValidation = { isValid: true, text: i18n.t('mainPage.form.validation.ok'), showBorder: true };
+              model.view.form.rssValidation = { isValid: true, text: i18nFunction('mainPage.form.validation.ok'), showBorder: true };
               model.view.form.rssField = '';
               const newItems = updateArrayWithItems(model.view.items, [ feeds ] );
               model.view.items = newItems;
@@ -106,7 +113,7 @@ const mainPageViewEvents = {
           })
           .catch((error) => {
             if (error.message.startsWith('errors.')) {
-              model.view.form.rssValidation = { isValid: false, text: i18n.t(error.message), showBorder: true };
+              model.view.form.rssValidation = { isValid: false, text: i18nFunction(error.message), showBorder: true };
             } else {
               model.view.form.rssValidation = { isValid: false, text: error, showBorder: true };
             }
@@ -114,7 +121,7 @@ const mainPageViewEvents = {
           });
       } else {
         // console.log('onAddRSSClicked: not valid');
-        model.view.form.rssValidation = { isValid: false, text: i18n.t('mainPage.form.validation.invalidLink'), showBorder: true };
+        model.view.form.rssValidation = { isValid: false, text: i18nFunction('mainPage.form.validation.invalidLink'), showBorder: true };
       }
     });
   },
@@ -144,6 +151,7 @@ const setMainPageModel = (modelData) => {
 };
 
 module.exports = {
+  initMainPageController,
   mainPageModelChangeCallback,
   setMainPageModel,
   mainPageViewEvents,

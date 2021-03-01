@@ -3,8 +3,9 @@ const i18n = i18next.default || i18next;
 const enTranslation = require('./en');
 const ruTranslation = require('./ru');
 
-const i18nextInstance = i18n.createInstance();
-const initTranslations = () => i18nextInstance.init({
+const initTranslations = async () => {
+  i18nextInstance = i18n.createInstance();
+  return i18nextInstance.init({
     lng: 'ru',
     debug: true,
     resources: {
@@ -15,9 +16,9 @@ const initTranslations = () => i18nextInstance.init({
         translation: ruTranslation,
       }
     }
-  });
+  })
+};
 
 module.exports = {
   initTranslations,
-  i18nextInstance,
 };

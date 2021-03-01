@@ -1,6 +1,8 @@
 const bootstrap = require('../libs/bootstrap/js/bootstrap');
-const { i18nextInstance } = require('../utils/translations/translations');
-const i18n = i18nextInstance;
+// const i18next = require('i18next');
+// const i18n = i18next.default || i18next;
+// const { i18nextInstance } = require('../utils/translations/translations');
+// const i18n = i18nextInstance.default || i18nextInstance;
 
 const {
   sortByTitleDesc,
@@ -9,7 +11,7 @@ const {
 const generateForm = () => {
   const label = document.createElement('span');
   label.classList.add('input-group-text');
-  label.textContent = i18n.t('mainPage.form.inputLabel');
+  label.textContent = i18nFunction('mainPage.form.inputLabel');
 
   const input = document.createElement('input');
   input.name = "url";
@@ -32,7 +34,7 @@ const generateForm = () => {
   button.classList.add('btn', 'btn-primary');
   button.id = 'addButton';
   button.disabled = true;
-  button.textContent = i18n.t('mainPage.form.submitButtonText');
+  button.textContent = i18nFunction('mainPage.form.submitButtonText');
 
   const form = document.createElement('form');
   form.classList.add('container', 'mt-3', 'needs-validation');
@@ -43,6 +45,7 @@ const generateForm = () => {
   return document.createElement('div').appendChild(form);
 };
 
+var i18nFunction;
 const generateModals = () => {
   const modals = document.createElement('div');
   modals.innerHTML = `
@@ -59,22 +62,22 @@ const generateModals = () => {
             <p id="modalBody"></p>
           </div>
           <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">${i18n.t('mainPage.modal.closeButton')}</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">${i18nFunction('mainPage.modal.closeButton')}</button>
           </div>
         </div>
       </div>
     </div>
   `;
-  //  <button type="button" class="btn btn-primary">${i18n.t('mainPage.modal.fullArticleButton')}</button>
+  //  <button type="button" class="btn btn-primary">${i18nFunction('mainPage.modal.fullArticleButton')}</button>
   return modals;
 };
 
 const generateHeader = () => {
   const baseHeader = document.createElement('h1');
-  baseHeader.textContent = i18n.t('mainPage.title');
+  baseHeader.textContent = i18nFunction('mainPage.title');
 
   const tagLine = document.createElement('summary');
-  tagLine.textContent = i18n.t('mainPage.summary');
+  tagLine.textContent = i18nFunction('mainPage.summary');
 
   const formContaner = generateForm();
 
@@ -98,7 +101,9 @@ const generateComments = (text) => {
   base.dataset.comment = text;
 };
 
-const generateMainPage = () => {
+const generateMainPage = (i18nFunc) => {
+  i18nFunction = i18nFunc;
+  console.log(`generateMainPage: i18nFunction = ${typeof i18nFunction}`);
   const content = document.createElement('div');
   content.id = 'base';
   content.classList.add('container');
@@ -151,7 +156,7 @@ const showValidationInfo = (options) => {
 const generateFeedsTable = (feeds) => {
   if (feeds.length > 0) {
     const feedsHeader = document.createElement('h2');
-    feedsHeader.textContent = i18n.t('mainPage.tables.feeds.name');
+    feedsHeader.textContent = i18nFunction('mainPage.tables.feeds.name');
 
     const feedsTableBody = document.createElement('tbody');
 
@@ -182,7 +187,7 @@ const generateItemRow = (item) => {
             type="button"
             class="btn btn-info col-2 preview"
             data-id="${item.link}">
-              ${i18n.t('mainPage.tables.items.previewButtonTitle')}
+              ${i18nFunction('mainPage.tables.items.previewButtonTitle')}
           </button>
         </div>
       </td>
@@ -192,7 +197,7 @@ const generateItemRow = (item) => {
 const generateItemsTable = (items) => {
   if (items.length > 0) {
     const itemsHeader = document.createElement('h2');
-    itemsHeader.textContent = i18n.t('mainPage.tables.items.name');;
+    itemsHeader.textContent = i18nFunction('mainPage.tables.items.name');;
 
     const itemsTableBody = document.createElement('tbody');
 
