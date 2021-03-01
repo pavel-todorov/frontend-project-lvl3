@@ -6,7 +6,7 @@ const translation = {
       inputLabel: 'RSS link:',
       submitButtonText: 'Add',
       validation: {
-        existedField: 'RSS успешно загружен.',
+        existedField: 'RSS уже существует',
         ok: 'RSS успешно загружен',
         invalidLink: 'Ссылка должна быть валидным URL',
       },
