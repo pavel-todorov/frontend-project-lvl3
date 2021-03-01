@@ -91,7 +91,7 @@ const mainPageViewEvents = {
     // console.log(`onAddRSSClicked: ${JSON.stringify(model)}`);
     event.preventDefault();
     const link = model.view.form.rssField;
-    generateComments(`onAddRSSClicked: ${link}`);
+    generateComments(`onAddRSSClicked: ${link}\nmodel: ${JSON.stringify(model)}`);
     model.view.form.addButtonEnabled = false;
     isRSSValid(link).then((isLinkValid) => {
       if (isLinkValid) {
