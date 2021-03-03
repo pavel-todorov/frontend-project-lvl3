@@ -14,6 +14,7 @@ const initMainPageModel = require('./mainPage/mainPageModel');
 
 const init = async () => initTranslations().then((i18nFunction) => {
   initMainPageController(i18nFunction);
+  document.body.innerHTML = '';
   document.body.appendChild(generateMainPage(i18nFunction));
   setMainPageModel(initMainPageModel(mainPageModelChangeCallback));
   subscribeOnViewEvents(mainPageViewEvents);
