@@ -15,6 +15,21 @@ const model = {
   },
 };
 
-const initModel = (callback) => (onChange(model, callback));
+const initModel = (callback) => {
+  return onChange({
+    view: {
+      form: {
+        rssField: '',
+        rssValidation: {
+          isValid: true,
+          test: '',
+          showBorder: false,
+        },
+        addButtonEnabled: false,
+      },
+      items: [],
+    },
+  }, callback);
+};
 
 module.exports = initModel;

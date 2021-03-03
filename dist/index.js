@@ -2439,7 +2439,7 @@ eval("const yup = __webpack_require__(/*! yup */ \"./node_modules/yup/es/index.j
   \***************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const onChange = __webpack_require__(/*! on-change */ \"./node_modules/on-change/index.js\");\n\nconst model = {\n  view: {\n    form: {\n      rssField: '',\n      rssValidation: {\n        isValid: true,\n        test: '',\n        showBorder: false,\n      },\n      addButtonEnabled: false,\n    },\n    items: [],\n  },\n};\n\nconst initModel = (callback) => (onChange(model, callback));\n\nmodule.exports = initModel;\n\n\n//# sourceURL=webpack://@hexlet/code/./src/mainPage/mainPageModel.js?");
+eval("const onChange = __webpack_require__(/*! on-change */ \"./node_modules/on-change/index.js\");\n\nconst model = {\n  view: {\n    form: {\n      rssField: '',\n      rssValidation: {\n        isValid: true,\n        test: '',\n        showBorder: false,\n      },\n      addButtonEnabled: false,\n    },\n    items: [],\n  },\n};\n\nconst initModel = (callback) => {\n  return onChange({\n    view: {\n      form: {\n        rssField: '',\n        rssValidation: {\n          isValid: true,\n          test: '',\n          showBorder: false,\n        },\n        addButtonEnabled: false,\n      },\n      items: [],\n    },\n  }, callback);\n};\n\nmodule.exports = initModel;\n\n\n//# sourceURL=webpack://@hexlet/code/./src/mainPage/mainPageModel.js?");
 
 /***/ }),
 
