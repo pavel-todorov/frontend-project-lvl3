@@ -12,15 +12,13 @@ const {
 } = require('./mainPage/mainPageView');
 const initMainPageModel = require('./mainPage/mainPageModel');
 
-const init = async () => {
-  return initTranslations().then((i18nFunction) => {
-    initMainPageController(i18nFunction);
-    document.body.appendChild(generateMainPage(i18nFunction));
-    setMainPageModel(initMainPageModel(mainPageModelChangeCallback));
-    subscribeOnViewEvents(mainPageViewEvents);
-  }).catch((err) => {
-    document.body.textContent = `Error while initializing page: ${err}`;
-  });
-};
+const init = async () => initTranslations().then((i18nFunction) => {
+  initMainPageController(i18nFunction);
+  document.body.appendChild(generateMainPage(i18nFunction));
+  setMainPageModel(initMainPageModel(mainPageModelChangeCallback));
+  subscribeOnViewEvents(mainPageViewEvents);
+}).catch((err) => {
+  document.body.textContent = `Error while initializing page: ${err}`;
+});
 
 export default init;
