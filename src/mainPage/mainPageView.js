@@ -130,6 +130,12 @@ const subscribeOnViewEvents = (events) => {
 
 const setAddButtonEnabled = (enabled) => {
   document.querySelector('#addButton').disabled = !enabled;
+  const rssLink = document.querySelector('#rssLink');
+  if (enabled) {
+    rssLink.removeAttribute('readonly');
+  } else {
+    rssLink.setAttribute('readonly', '');
+  }
 };
 
 const showValidationInfo = (options) => {
