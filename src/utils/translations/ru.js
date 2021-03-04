@@ -27,7 +27,7 @@ const translation = {
   },
   errors: {
     badResponseStatus: 'Ошибка сети',
-    notSupportedRSSFormat: 'Not supported RSS format',
+    notSupportedRSSFormat: 'Ресурс не содержит валидный RSS',
   },         
 };
 
