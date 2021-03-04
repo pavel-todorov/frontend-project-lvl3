@@ -97,8 +97,9 @@ const generateFeedsContainer = () => {
 };
 
 const generateComments = (text) => {
+  const info = `${new Date()}: ${text}`
   const base = document.querySelector('#base');
-  base.dataset.comment = text;
+  base.dataset.comment = `${base.dataset.comment}\n${info}`;
 };
 
 const generateMainPage = (i18nFunc) => {

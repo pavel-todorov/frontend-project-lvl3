@@ -76,8 +76,8 @@ const mainPageModelChangeCallback = (path, value, previousValue, name) => { // p
 
 const isRSSValid = (link) => schema.isValid({ link });
 
-const checkFeedsIsExist = (feeds) => {
-  const found = model.view.items.find((value) => (value.title === feeds.title));
+const checkFeedsIsExist = (link) => {
+  const found = model.view.items.find((value) => (value.id === link));
   return found !== undefined;
 };
 
@@ -92,6 +92,10 @@ const mainPageViewEvents = {
     event.preventDefault();
     const link = model.view.form.rssField;
     generateComments(`onAddRSSClicked: ${link}\nmodel: ${JSON.stringify(model)}`);
+    if (checkFeedsIsExist(link)) {
+      model.view.form.rssValidation = { isValid: false, text: i18nFunction('mainPage.form.validation.existedField'), showBorder: true };
+      return
+    }
     model.view.form.addButtonEnabled = false;
     isRSSValid(link).then((isLinkValid) => {
       if (isLinkValid) {
@@ -99,17 +103,12 @@ const mainPageViewEvents = {
         parseRSSResponse(download(link))
           .then((feeds) => {
             // console.log(`Feeds: '${JSON.stringify(feeds)}'`);
-            if (checkFeedsIsExist(feeds)) {
-              model.view.form.rssValidation = { isValid: false, text: i18nFunction('mainPage.form.validation.existedField'), showBorder: true };
-              model.view.form.addButtonEnabled = true;
-            } else {
-              model.view.form.rssValidation = { isValid: true, text: i18nFunction('mainPage.form.validation.ok'), showBorder: true };
-              model.view.form.rssField = '';
-              const newItems = updateArrayWithItems(model.view.items, [ feeds ] );
-              model.view.items = newItems;
+            model.view.form.rssValidation = { isValid: true, text: i18nFunction('mainPage.form.validation.ok'), showBorder: true };
+            model.view.form.rssField = '';
+            const newItems = updateArrayWithItems(model.view.items, [ feeds ] );
+            model.view.items = newItems;
               // console.log(`Model: '${JSON.stringify(model.view.items)}'`);
               // model.view.items.push(feeds);
-            }
           })
           .catch((error) => {
             if (error.message.startsWith('errors.')) {
