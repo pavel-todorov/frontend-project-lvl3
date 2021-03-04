@@ -23,7 +23,7 @@ const parseRSSResponse = (responsePromise) => {
     .then((response) => {
       // console.log(`Response: ${JSON.stringify(response)}`);
       const respJSON = response;
-      if (respJSON.status !== 200/* || respJSON.data.status.http_code !== 200*/) {
+      if (respJSON.status !== 200 || respJSON.data.contents === null) {
         throw new Error('errors.badResponseStatus');
       }
       const domparser = new DOMParser();
