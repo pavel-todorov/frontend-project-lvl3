@@ -116,10 +116,15 @@ const generateMainPage = (i18nFunc) => {
 
 let viewEventsSubscribtions;
 const subscribeOnViewEvents = (events) => {
+  const rssLink = document.querySelector('#rssLink');
+  const addButton = document.querySelector('#addButton');
+  if (viewEventsSubscribtions !== undefined) {
+    rssLink.removeEventListener('input', events.onRSSChange);
+    addButton.removeEventListener('click', events.onAddRSSClicked);
+  }
   viewEventsSubscribtions = events;
-  document.querySelector('#rssLink').addEventListener('input', events.onRSSChange);
-  document.querySelector('#addButton').addEventListener('click', events.onAddRSSClicked);
-  // document.querySelector('button[data-dismiss="modal"]')
+  rssLink.addEventListener('input', events.onRSSChange);
+  addButton.addEventListener('click', events.onAddRSSClicked);
 };
 
 const setAddButtonEnabled = (enabled) => {
