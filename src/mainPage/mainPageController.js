@@ -85,7 +85,7 @@ const mainPageViewEvents = {
   onRSSChange: (event) => {
     // console.log(`onRSSChange: ${event.target.value}`);
     model.view.form.rssField = event.target.value;
-    model.view.form.addButtonEnabled = model.view.form.rssField !== '';
+    // model.view.form.addButtonEnabled = model.view.form.rssField !== '';
   },
   onAddRSSClicked: (event) => {
     // console.log(`onAddRSSClicked: ${JSON.stringify(model)}`);
