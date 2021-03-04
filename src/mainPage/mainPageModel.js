@@ -1,21 +1,6 @@
 const onChange = require('on-change');
 
-const model = {
-  view: {
-    form: {
-      rssField: '',
-      rssValidation: {
-        isValid: true,
-        test: '',
-        showBorder: false,
-      },
-      addButtonEnabled: true,
-    },
-    items: [],
-  },
-};
-
-const initModel = (callback) => {
+const initModel = (callback) => { 
   return onChange({
     view: {
       form: {
@@ -25,7 +10,7 @@ const initModel = (callback) => {
           test: '',
           showBorder: false,
         },
-        addButtonEnabled: false,
+        addButtonEnabled: true,
       },
       items: [],
     },
