@@ -115,7 +115,7 @@ const mainPageViewEvents = {
             if (error.message.startsWith('errors.')) {
               model.view.form.rssValidation = { isValid: false, text: i18nFunction(error.message), showBorder: true };
             } else {
-              model.view.form.rssValidation = { isValid: false, text: i18nFunction(errors.badResponseStatus), showBorder: true };
+              model.view.form.rssValidation = { isValid: false, text: i18nFunction('errors.badResponseStatus'), showBorder: true };
             }
             model.view.form.addButtonEnabled = true;
           });
