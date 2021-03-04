@@ -33,7 +33,7 @@ const generateForm = () => {
   button.type = 'submit';
   button.classList.add('btn', 'btn-primary');
   button.id = 'addButton';
-  button.disabled = true;
+  button.disabled = false;
   button.textContent = i18nFunction('mainPage.form.submitButtonText');
 
   const form = document.createElement('form');

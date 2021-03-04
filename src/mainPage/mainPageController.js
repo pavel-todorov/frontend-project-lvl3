@@ -109,6 +109,7 @@ const mainPageViewEvents = {
             model.view.items = newItems;
               // console.log(`Model: '${JSON.stringify(model.view.items)}'`);
               // model.view.items.push(feeds);
+              model.view.form.addButtonEnabled = true;
           })
           .catch((error) => {
             console.log(`Error: ${error}`);

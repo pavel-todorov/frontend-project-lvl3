@@ -9,7 +9,7 @@ const model = {
         test: '',
         showBorder: false,
       },
-      addButtonEnabled: false,
+      addButtonEnabled: true,
     },
     items: [],
   },
