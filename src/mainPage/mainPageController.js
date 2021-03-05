@@ -1,3 +1,4 @@
+/* eslint functional/no-let: ["off"] */
 const yup = require('yup');
 const {
   setAddButtonEnabled,

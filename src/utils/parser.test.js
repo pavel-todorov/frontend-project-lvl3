@@ -1,3 +1,4 @@
+/* eslint jest/valid-expect-in-promise: ["off"] */
 const path = require('path');
 const fs = require('fs');
 const { parseRSSResponse } = require('./parser');

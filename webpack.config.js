@@ -1,3 +1,6 @@
+/* eslint object-shorthand: ["off"] */
+/* eslint global-require: ["off"] */
+/* eslint func-names: ["off"] */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -25,13 +28,13 @@ module.exports = {
             plugins: function () {
               return [
                 require('precss'),
-                require('autoprefixer')
+                require('autoprefixer'),
               ];
-            }
-          }
+            },
+          },
         }, {
-          loader: 'sass-loader'
-        }]
+          loader: 'sass-loader',
+        }],
       },
       {
         test: /\.js$/,
@@ -43,10 +46,10 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 8192,
-          name:'[name].[ext]',
-          outputPath:'assets'
-        }
-      }
+          name: '[name].[ext]',
+          outputPath: 'assets',
+        },
+      },
     ],
   },
   plugins: [
@@ -54,5 +57,5 @@ module.exports = {
       template: './index.html'
     })
   ],
-  stats: "detailed"
+  stats: 'detailed',
 };

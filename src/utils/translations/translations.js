@@ -1,3 +1,4 @@
+/* eslint functional/no-let: ["off"] */
 const i18next = require('i18next');
 const enTranslation = require('./en');
 const ruTranslation = require('./ru');

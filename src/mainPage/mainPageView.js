@@ -1,3 +1,4 @@
+/* eslint functional/no-let: ["off"] */
 // const bootstrap = require('../../node_modules/bootstrap/dist/js/bootstrap');
 
 const {
