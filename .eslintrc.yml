@@ -9,6 +9,6 @@ parserOptions:
   sourceType: module
 ignorePatterns: 
   - webpack.config.js
-  - src/libs/**
-  - dist/**
+  - src/libs
+  - dist
 rules: {}
