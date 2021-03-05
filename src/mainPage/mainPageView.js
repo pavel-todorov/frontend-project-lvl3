@@ -1,4 +1,4 @@
-const bootstrap = require('../../node_modules/bootstrap/dist/js/bootstrap');
+// const bootstrap = require('../../node_modules/bootstrap/dist/js/bootstrap');
 
 const {
   sortByTitleDesc,
@@ -253,8 +253,17 @@ const showModal = (title, body) => {
   document.getElementById('modalTitle').textContent = title;
   document.getElementById('modalBody').textContent = body;
   const modalNode = document.getElementById('simpleModal');
-  const modal = new bootstrap.Modal(modalNode);
-  modal.show();
+  document.body.classList.add('modal-open');
+  modalNode.classList.add('show');
+  modalNode.setAttribute('style', 'display: block');
+  modalNode.setAttribute('aria-modal', 'true');
+  modalNode.removeAttribute('aria-hidden');
+  modalNode.setAttribute('role', 'dialog');
+  // const modal = new bootstrap.Modal(modalNode);
+  // modal.show();
+  const div = document.createElement('div');
+  div.classList.add('modal-backdrop', 'fade', 'show');
+  document.body.appendChild(div);
 };
 
 module.exports = {
