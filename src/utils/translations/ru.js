@@ -17,7 +17,7 @@ const translation = {
       },
       items: {
         name: 'Items',
-        previewButtonTitle: 'Preview',
+        previewButtonTitle: 'Просмотр',
       }
     },
     modal: {

@@ -195,10 +195,10 @@ const generateItemRow = (item) => {
       <td>
         <div class="row">
         <!--<h5 class="${weight} col-10">${item.title}</h5>-->
-          <a class="${weight} col-10 link-primary" target="_blank" rel="noopener noreferrer" href="${item.link}" role="link">${item.title}</a>
+          <a class="${weight} col-9 link-primary" target="_blank" rel="noopener noreferrer" href="${item.link}" role="link">${item.title}</a>
           <button
             type="button"
-            class="btn btn-info col-2 preview"
+            class="btn btn-info col-3 preview"
             data-id="${item.link}">
               ${i18nFunction('mainPage.tables.items.previewButtonTitle')}
           </button>
