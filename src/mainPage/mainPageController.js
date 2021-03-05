@@ -89,10 +89,10 @@ const mainPageViewEvents = {
     // model.view.form.addButtonEnabled = model.view.form.rssField !== '';
   },
   onAddRSSClicked: (event) => {
-    console.log(`onAddRSSClicked: ${JSON.stringify(model)}`);
+    // console.log(`onAddRSSClicked: ${JSON.stringify(model)}`);
     event.preventDefault();
     const link = model.view.form.rssField;
-    // generateComments(`onAddRSSClicked: ${link}\nmodel: ${JSON.stringify(model)}`);
+    generateComments(`onAddRSSClicked: ${link}\nmodel: ${JSON.stringify(model)}`);
     if (checkFeedsIsExist(link)) {
       model.view.form.rssValidation = { isValid: false, text: i18nFunction('mainPage.form.validation.existedField'), showBorder: true };
       return
