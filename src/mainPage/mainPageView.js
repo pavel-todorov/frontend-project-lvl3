@@ -194,7 +194,8 @@ const generateItemRow = (item) => {
     <tr>
       <td>
         <div class="row">
-          <h5 class="${weight} col-10">${item.title}</h5>
+        <!--<h5 class="${weight} col-10">${item.title}</h5>-->
+          <a class="${weight} col-10 link-primary" target="_blank" rel="noopener noreferrer" href="${item.link}" role="link">${item.title}</a>
           <button
             type="button"
             class="btn btn-info col-2 preview"
