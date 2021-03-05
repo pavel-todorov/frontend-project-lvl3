@@ -1,5 +1,5 @@
-import './libs/bootstrap/js/bootstrap';
-import './libs/bootstrap/css/bootstrap.css';
+import '../node_modules/bootstrap/dist/js/bootstrap.min';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'webpack-icons-installer/bootstrap';
 import init from './main';
 
