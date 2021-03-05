@@ -178,7 +178,7 @@ const generateFeedsTable = (feeds) => {
 
 const generateItemRow = (item) => {
   let weight = 'font-weight-nomal';
-  if (item.isNew ?? true) {
+  if (item.isNew !== false) {
     weight = 'font-weight-bold';
   }
   return `

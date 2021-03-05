@@ -11,4 +11,6 @@ ignorePatterns:
   - webpack.config.js
   - src/libs/**
   - dist/**
-rules: {}
+rules: {
+  functional/no-let: ["off"]
+}
