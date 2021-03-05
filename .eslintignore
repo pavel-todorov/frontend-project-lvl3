@@ -1,3 +1,2 @@
-src/libs/css/**
-src/libs/js/**
+src/libs
 webpack.config.js
