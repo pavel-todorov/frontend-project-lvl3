@@ -3,7 +3,7 @@ start:
 build:
 	NODE_ENV=production npx webpack
 lint:
-	npx eslint "src/**.js"
+	npx eslint --no-eslintrc --config .eslintrc.yml .
 test:
 	npm test
 install:

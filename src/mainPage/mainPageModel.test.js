@@ -1,13 +1,9 @@
 const initMainPageModel = require('./mainPageModel');
 
-const mainPageModelChangeCallback = (path, value, previousValue, name) => { // previousValue, name
-    console.log(`Model changed but not processed: ${path}: ${previousValue} -> ${value} (${name})`);
-};
-
 test('Check init recreates model', async () => {
-  const model1 = initMainPageModel(mainPageModelChangeCallback);
+  const model1 = initMainPageModel(() => {});
   model1.view.items = ['test'];
-  const model2 = initMainPageModel(mainPageModelChangeCallback);
+  const model2 = initMainPageModel(() => {});
 
   expect(model2.view.items.length).toBe(0);
 });

@@ -21,15 +21,15 @@ const schema = yup.object().shape({
   link: yup.string().url(),
 });
 
-var i18nFunction;
+let i18nFunction;
 
 const initMainPageController = (i18nFunc) => {
   i18nFunction = i18nFunc;
-  console.log(`initMaionPageController(${typeof i18nFunction})`);
+  // console.log(`initMaionPageController(${typeof i18nFunction})`);
 };
 
 const updateFeedsHandler = () => {
-  console.log(`Time to update feeds: ${new Date()}`);
+  // console.log(`Time to update feeds: ${new Date()}`);
   const requests = model.view.items.map((feeds) => parseRSSResponse(download(feeds.id)));
   Promise.all(requests)
     .then((results) => {
@@ -48,14 +48,14 @@ const setTimerForUpdateFeeds = () => {
   feedsUpdateTimerId = window.setTimeout(updateFeedsHandler, 5 * 1000);
 };
 
-const mainPageModelChangeCallback = (path, value, previousValue, name) => { // previousValue, name
+const mainPageModelChangeCallback = (path, value) => {
   switch (path) {
     case 'view.form.addButtonEnabled':
-      console.log(`AddButtonEnabled: ${value}`);
+      // console.log(`AddButtonEnabled: ${value}`);
       setAddButtonEnabled(value);
       break;
     case 'view.form.rssValidation':
-      console.log('New RSS validation');
+      // console.log('New RSS validation');
       showValidationInfo(value);
       break;
     case 'view.form.rssField':
@@ -70,7 +70,6 @@ const mainPageModelChangeCallback = (path, value, previousValue, name) => { // p
       }
       break;
     default:
-      console.log(`Model changed but not processed: ${path}: ${previousValue} -> ${value} (${name})`);
       break;
   }
 };
@@ -95,27 +94,31 @@ const mainPageViewEvents = {
     generateComments(`onAddRSSClicked: ${link}\nmodel: ${JSON.stringify(model)}`);
     if (checkFeedsIsExist(link)) {
       model.view.form.rssValidation = { isValid: false, text: i18nFunction('mainPage.form.validation.existedField'), showBorder: true };
-      return
+      return;
     }
     model.view.form.addButtonEnabled = false;
     isRSSValid(link).then((isLinkValid) => {
       if (isLinkValid) {
-        console.log('onAddRSSClicked: then1');
+        // console.log('onAddRSSClicked: then1');
         parseRSSResponse(download(link))
           .then((feeds) => {
             // console.log(`Feeds: '${JSON.stringify(feeds)}'`);
             model.view.form.rssValidation = { isValid: true, text: i18nFunction('mainPage.form.validation.ok'), showBorder: true };
             model.view.form.rssField = '';
-            const newItems = updateArrayWithItems(model.view.items, [ feeds ] );
+            const newItems = updateArrayWithItems(model.view.items, [feeds]);
             model.view.items = newItems;
-              // console.log(`Model: '${JSON.stringify(model.view.items)}'`);
-              // model.view.items.push(feeds);
-              model.view.form.addButtonEnabled = true;
+            // console.log(`Model: '${JSON.stringify(model.view.items)}'`);
+            // model.view.items.push(feeds);
+            model.view.form.addButtonEnabled = true;
           })
           .catch((error) => {
-            console.log(`Error: ${error}`);
+            // console.log(`Error: ${error}`);
             if (error.message.startsWith('errors.')) {
-              model.view.form.rssValidation = { isValid: false, text: i18nFunction(error.message), showBorder: true };
+              model.view.form.rssValidation = {
+                isValid: false,
+                text: i18nFunction(error.message),
+                showBorder: true,
+              };
             } else {
               model.view.form.rssValidation = { isValid: false, text: i18nFunction('errors.badResponseStatus'), showBorder: true };
             }
@@ -127,11 +130,12 @@ const mainPageViewEvents = {
       }
     });
   },
+
   onPreviewClicked: (event) => {
     event.preventDefault();
     model.view.form.rssValidation = { isValid: true, text: '', showBorder: false };
     model.view.form.rssField = '';
-    const id = event.target.dataset.id;
+    const { id } = event.target.dataset;
     // console.log(`Preview clicked: ${id}`);
     let found;
     model.view.items.forEach((feed) => {
@@ -150,7 +154,7 @@ const mainPageViewEvents = {
 
 const setMainPageModel = (modelData) => {
   model = modelData;
-  console.log(`seMainPageModel: ${JSON.stringify(model)}`);
+  // console.log(`seMainPageModel: ${JSON.stringify(model)}`);
 };
 
 module.exports = {

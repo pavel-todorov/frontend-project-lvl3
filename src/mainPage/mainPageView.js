@@ -1,12 +1,10 @@
 const bootstrap = require('../libs/bootstrap/js/bootstrap');
-// const i18next = require('i18next');
-// const i18n = i18next.default || i18next;
-// const { i18nextInstance } = require('../utils/translations/translations');
-// const i18n = i18nextInstance.default || i18nextInstance;
 
 const {
   sortByTitleDesc,
 } = require('../utils/sorting');
+
+let i18nFunction;
 
 const generateForm = () => {
   const label = document.createElement('span');
@@ -14,7 +12,7 @@ const generateForm = () => {
   label.textContent = i18nFunction('mainPage.form.inputLabel');
 
   const input = document.createElement('input');
-  input.name = "url";
+  input.name = 'url';
   input.setAttribute('required', '');
   input.setAttribute('aria-label', 'url');
   input.type = 'text';
@@ -45,7 +43,6 @@ const generateForm = () => {
   return document.createElement('div').appendChild(form);
 };
 
-var i18nFunction;
 const generateModals = () => {
   const modals = document.createElement('div');
   modals.innerHTML = `
@@ -68,7 +65,6 @@ const generateModals = () => {
       </div>
     </div>
   `;
-  //  <button type="button" class="btn btn-primary">${i18nFunction('mainPage.modal.fullArticleButton')}</button>
   return modals;
 };
 
@@ -97,14 +93,13 @@ const generateFeedsContainer = () => {
 };
 
 const generateComments = (text) => {
-  const info = `${new Date()}: ${text}`
+  const info = `${new Date()}: ${text}`;
   const base = document.querySelector('#base');
   base.dataset.comment = `${base.dataset.comment}\n${info}`;
 };
 
 const generateMainPage = (i18nFunc) => {
   i18nFunction = i18nFunc;
-  console.log(`generateMainPage: i18nFunction = ${typeof i18nFunction}`);
   const content = document.createElement('div');
   content.id = 'base';
   content.classList.add('container');
@@ -139,12 +134,11 @@ const setAddButtonEnabled = (enabled) => {
 };
 
 const showValidationInfo = (options) => {
-  console.log(`showValidationInfo: ${JSON.stringify(options)}`);
   const input = document.querySelector('#rssLink');
   input.classList.remove('is-invalid', 'is-valid');
   if (options.showBorder && options.isValid) {
     input.classList.add('is-valid');
-  } 
+  }
   if (options.showBorder && !options.isValid) {
     input.classList.add('is-invalid');
   }
@@ -180,21 +174,18 @@ const generateFeedsTable = (feeds) => {
     feedsTableBody.innerHTML = feedsTableItems;
     return [feedsHeader, feedsTable];
   }
-  else {
-    return [];
-  }
+  return [];
 };
 
 const generateItemRow = (item) => {
   let weight = 'font-weight-nomal';
-  if (item.isNew) {
+  if (item.isNew ?? true) {
     weight = 'font-weight-bold';
   }
   return `
     <tr>
       <td>
         <div class="row">
-        <!--<h5 class="${weight} col-10">${item.title}</h5>-->
           <a class="${weight} col-9 link-primary" target="_blank" rel="noopener noreferrer" href="${item.link}" role="link">${item.title}</a>
           <button
             type="button"
@@ -204,20 +195,20 @@ const generateItemRow = (item) => {
           </button>
         </div>
       </td>
-    </tr>`
+    </tr>`;
 };
 
 const generateItemsTable = (items) => {
   if (items.length > 0) {
     const itemsHeader = document.createElement('h2');
-    itemsHeader.textContent = i18nFunction('mainPage.tables.items.name');;
+    itemsHeader.textContent = i18nFunction('mainPage.tables.items.name');
 
     const itemsTableBody = document.createElement('tbody');
 
     const itemsTable = document.createElement('table');
     itemsTable.classList.add('table');
     itemsTable.appendChild(itemsTableBody);
-    itemsTable.addEventListener('click', (event) => { 
+    itemsTable.addEventListener('click', (event) => {
       if (event.target.classList.contains('preview') && event.target.dataset.id !== undefined) {
         viewEventsSubscribtions.onPreviewClicked(event);
       }
@@ -226,9 +217,8 @@ const generateItemsTable = (items) => {
     const itemsTableItems = items.map((item) => generateItemRow(item)).join('\n');
     itemsTableBody.innerHTML = itemsTableItems;
     return [itemsHeader, itemsTable];
-  } else {
-    return [];
   }
+  return [];
 };
 
 const updateFeeds = (feedsArray) => {
@@ -264,7 +254,7 @@ const showModal = (title, body) => {
   document.getElementById('modalTitle').textContent = title;
   document.getElementById('modalBody').textContent = body;
   const modalNode = document.getElementById('simpleModal');
-  var modal = new bootstrap.Modal(modalNode);
+  const modal = new bootstrap.Modal(modalNode);
   modal.show();
 };
 

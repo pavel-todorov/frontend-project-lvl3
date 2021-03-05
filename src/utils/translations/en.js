@@ -18,7 +18,7 @@ const translation = {
       items: {
         name: 'Items',
         previewButtonTitle: 'Preview',
-      }
+      },
     },
     modal: {
       closeButton: 'Close',
@@ -28,7 +28,7 @@ const translation = {
   errors: {
     badResponseStatus: 'Response status is not OK',
     notSupportedRSSFormat: 'Not supported RSS format',
-  },         
+  },
 };
 
 module.exports = translation;

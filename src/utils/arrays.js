@@ -17,7 +17,11 @@ const updateArrayWithItems = (source, toUpdate) => {
     if (!sourceMap.has(feeds.id)) {
       sourceMap.set(feeds.id, { feeds, map: new Map() });
     } else {
-      sourceMap.get(feeds.id).feeds = { title: feeds.title, description: feeds.description, id: feeds.id };
+      sourceMap.get(feeds.id).feeds = {
+        title: feeds.title,
+        description: feeds.description,
+        id: feeds.id,
+      };
     }
     feeds.items.forEach((item) => {
       if (sourceMap.get(feeds.id).map.has(item.link)) {
@@ -35,9 +39,6 @@ const updateArrayWithItems = (source, toUpdate) => {
   sourceMap.forEach((feeds) => {
     const items = [];
     feeds.map.forEach((item) => {
-      if (item.isNew === undefined) {
-        item.isNew = true;
-      }
       items.push(item);
     });
     items.sort(sortByPubDateDesc);
@@ -54,4 +55,4 @@ const updateArrayWithItems = (source, toUpdate) => {
 
 module.exports = {
   updateArrayWithItems,
-}
+};

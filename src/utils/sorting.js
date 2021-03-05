@@ -9,7 +9,7 @@ const sortByPubDateDesc = (a, b) => {
   }
   return 0;
 };
-  
+
 const sortByTitleAsc = (a, b) => {
   if (a.title < b.title) {
     return -1;
@@ -29,9 +29,9 @@ const sortByTitleDesc = (a, b) => {
   }
   return 0;
 };
-    
+
 module.exports = {
   sortByPubDateDesc,
   sortByTitleDesc,
   sortByTitleAsc,
-}  
+};

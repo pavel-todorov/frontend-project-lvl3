@@ -18,7 +18,7 @@ const translation = {
       items: {
         name: 'Items',
         previewButtonTitle: 'Просмотр',
-      }
+      },
     },
     modal: {
       closeButton: 'Close',
@@ -28,7 +28,7 @@ const translation = {
   errors: {
     badResponseStatus: 'Ошибка сети',
     notSupportedRSSFormat: 'Ресурс не содержит валидный RSS',
-  },         
+  },
 };
 
 module.exports = translation;

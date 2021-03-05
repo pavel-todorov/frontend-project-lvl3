@@ -1,20 +1,18 @@
 const onChange = require('on-change');
 
-const initModel = (callback) => { 
-  return onChange({
-    view: {
-      form: {
-        rssField: '',
-        rssValidation: {
-          isValid: true,
-          test: '',
-          showBorder: false,
-        },
-        addButtonEnabled: true,
+const initModel = (callback) => (onChange({
+  view: {
+    form: {
+      rssField: '',
+      rssValidation: {
+        isValid: true,
+        test: '',
+        showBorder: false,
       },
-      items: [],
+      addButtonEnabled: true,
     },
-  }, callback);
-};
+    items: [],
+  },
+}, callback));
 
 module.exports = initModel;

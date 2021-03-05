@@ -19,7 +19,7 @@ const source = [{
       link: '1.1',
       isNew: false,
     },
-  ]
+  ],
 }];
 
 const newFeeds = [{
@@ -33,7 +33,7 @@ const newFeeds = [{
       pubDate: 'Tue, 09 Feb 2021 05:27:00 GMT',
       link: '1.2',
     },
-  ]
+  ],
 }];
 
 test('Update array with items normal case', () => {
@@ -47,7 +47,6 @@ test('Update array with items normal case', () => {
         description: 'description1.2+',
         pubDate: 'Tue, 09 Feb 2021 05:27:00 GMT',
         link: '1.2',
-        isNew: true,
       },
       {
         title: 'title1.1',
@@ -56,7 +55,7 @@ test('Update array with items normal case', () => {
         link: '1.1',
         isNew: false,
       },
-    ]
+    ],
   }];
   expect(updateArrayWithItems(source, newFeeds)).toEqual(expectResult);
 });
