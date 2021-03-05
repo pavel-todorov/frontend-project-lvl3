@@ -1,4 +1,4 @@
-const bootstrap = require('../../node_modules/bootstrap/dist/js/bootstrap.min');
+const bootstrap = require('../../node_modules/bootstrap/dist/js/bootstrap');
 
 const {
   sortByTitleDesc,
